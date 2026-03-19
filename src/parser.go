@@ -68,9 +68,9 @@ func ParseOBJ(filePath string) ([]Vector3, []Face, BoundingBox, error) {
 			}
 		case "f":
 			if len(parts) >= 4 {
-				v1, _ = strconv.Atoi(strings.Split(parts[1], "/")[0])
-				v2, _ = strconv.Atoi(strings.Split(parts[2], "/")[0])
-				v3, _ = strconv.Atoi(strings.Split(parts[3], "/")[0])
+				v1, _ := strconv.Atoi(strings.Split(parts[1], "/")[0])
+				v2, _ := strconv.Atoi(strings.Split(parts[2], "/")[0])
+				v3, _ := strconv.Atoi(strings.Split(parts[3], "/")[0])
 
 				faces = append(faces, Face{V: [3]int{v1 - 1, v2 - 1, v3 - 1}})
 			}
@@ -86,16 +86,16 @@ func ParseOBJ(filePath string) ([]Vector3, []Face, BoundingBox, error) {
 	return vertices, faces, bbox, nil
 }
 
-func MakeCubicBoundingBox(bbox, BoundingBox) BoundingBox {
+func MakeCubicBoundingBox(bbox BoundingBox) BoundingBox {
 	dx := bbox.Max.X - bbox.Min.X
 	dy := bbox.Max.Y - bbox.Min.Y
 	dz := bbox.Max.Z - bbox.Min.Z
 
 	maxDim := math.Max(dx, math.Max(dy, dz))
 
-	centerX = bbox.Min.X + dx/2.0
-	centerY = bbox.Min.Y + dy/2.0
-	centerZ = bbox.Min.Z + dz/2.0
+	centerX := bbox.Min.X + dx/2.0
+	centerY := bbox.Min.Y + dy/2.0
+	centerZ := bbox.Min.Z + dz/2.0
 
 	halfDim := maxDim / 2.0
 

@@ -118,23 +118,23 @@ func IsIntersectingSAT(box BoundingBox, v0, v1, v2 Vector3) bool {
 		return false
 	}
 
-	if !axisTest(0, f0.Z, -f0.X, v0, v1, v2, e) {
+	if !axisTest(f0.Z, 0, -f0.X, v0, v1, v2, e) {
 		return false
 	}
-	if !axisTest(0, f1.Z, -f1.X, v0, v1, v2, e) {
+	if !axisTest(f1.Z, 0, -f1.X, v0, v1, v2, e) {
 		return false
 	}
-	if !axisTest(0, f2.Z, -f2.X, v0, v1, v2, e) {
+	if !axisTest(f2.Z, 0, -f2.X, v0, v1, v2, e) {
 		return false
 	}
 
-	if !axisTest(0, -f0.Y, f0.X, v0, v1, v2, e) {
+	if !axisTest(-f0.Y, f0.X, 0, v0, v1, v2, e) {
 		return false
 	}
-	if !axisTest(0, -f1.Y, f1.X, v0, v1, v2, e) {
+	if !axisTest(-f1.Y, f1.X, 0, v0, v1, v2, e) {
 		return false
 	}
-	if !axisTest(0, -f2.Y, f2.X, v0, v1, v2, e) {
+	if !axisTest(-f2.Y, f2.X, 0, v0, v1, v2, e) {
 		return false
 	}
 

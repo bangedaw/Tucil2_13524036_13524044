@@ -62,9 +62,9 @@ func ParseOBJ(filePath string) ([]Vector3, []Face, BoundingBox, error) {
 				bbox.Min.X = math.Min(bbox.Min.X, x)
 				bbox.Min.Y = math.Min(bbox.Min.Y, y)
 				bbox.Min.Z = math.Min(bbox.Min.Z, z)
-				bbox.Max.X = math.Max(bbox.Min.X, x)
-				bbox.Max.Y = math.Max(bbox.Min.Y, y)
-				bbox.Max.Z = math.Max(bbox.Min.Z, z)
+				bbox.Max.X = math.Max(bbox.Max.X, x)
+				bbox.Max.Y = math.Max(bbox.Max.Y, y)
+				bbox.Max.Z = math.Max(bbox.Max.Z, z)
 			}
 		case "f":
 			if len(parts) >= 4 {

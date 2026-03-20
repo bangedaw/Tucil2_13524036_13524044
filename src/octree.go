@@ -165,7 +165,7 @@ func axisTest(aX, aY, aZ float64, v0, v1, v2, e Vector3) bool {
 
 	r := e.X*math.Abs(aX) + e.Y*math.Abs(aY) + e.Z*math.Abs(aZ)
 
-	if min > r || max < r {
+	if min > r || max < -r {
 		return false
 	}
 	return true

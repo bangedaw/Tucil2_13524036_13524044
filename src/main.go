@@ -5,11 +5,12 @@ import (
 	"log"
 	"sync"
 	"time"
+	"net/http"
 )
 
 func main() {
-	inputFile := "../test/pumpkin.obj"
-	outputFile := "pumpkin-voxelized.obj"
+	inputFile := "../test/input/cow.obj"
+	outputFile := "../test/output/cow-voxelized.obj"
 	maxDepth := 5
 
 	startTime := time.Now()
@@ -42,5 +43,16 @@ func main() {
 	PrintReport(stats, len(solidVoxels), numVertices, numFaces, maxDepth, executionTime, outputFile)
 
 	fmt.Println("\nMembuka Interactive Viewer...")
-	ViewVoxelsInteractive((solidVoxels))
+	if err := ObjtoModel(outputFile); err != nil {
+		log.Fatalf("Gagal memuat model untuk viewer: %v", err)
+	}
+
+	http.HandleFunc("/", handleIndex)
+	http.HandleFunc("/render", handleRender)
+
+	port := ":8080"
+
+	if err := http.ListenAndServe(port, nil); err != nil {
+		fmt.Printf("Viewer Error", err)
+	}
 }

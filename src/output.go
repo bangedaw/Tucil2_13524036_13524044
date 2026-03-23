@@ -34,23 +34,23 @@ func ExportToObj(voxels []BoundingBox, outputPath string) (int, int, error) {
 	faceCount := 0
 
 	for _, v := range voxels {
-		fmt.Fprint(file, "v %f %f %f\n", v.Min.X, v.Min.Y, v.Min.Z)
-		fmt.Fprint(file, "v %f %f %f\n", v.Max.X, v.Min.Y, v.Min.Z)
-		fmt.Fprint(file, "v %f %f %f\n", v.Max.X, v.Min.Y, v.Max.Z)
-		fmt.Fprint(file, "v %f %f %f\n", v.Min.X, v.Min.Y, v.Max.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Min.X, v.Min.Y, v.Min.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Max.X, v.Min.Y, v.Min.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Max.X, v.Min.Y, v.Max.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Min.X, v.Min.Y, v.Max.Z)
 
-		fmt.Fprint(file, "v %f %f %f\n", v.Min.X, v.Max.Y, v.Min.Z)
-		fmt.Fprint(file, "v %f %f %f\n", v.Max.X, v.Max.Y, v.Min.Z)
-		fmt.Fprint(file, "v %f %f %f\n", v.Max.X, v.Max.Y, v.Max.Z)
-		fmt.Fprint(file, "v %f %f %f\n", v.Min.X, v.Max.Y, v.Max.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Min.X, v.Max.Y, v.Min.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Max.X, v.Max.Y, v.Min.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Max.X, v.Max.Y, v.Max.Z)
+		fmt.Fprintf(file, "v %f %f %f\n", v.Min.X, v.Max.Y, v.Max.Z)
 
 		offset := vertexCount + 1
-		fmt.Fprint(file, "f %d %d %d %d\n", offset, offset+1, offset+2, offset+3)
-		fmt.Fprint(file, "f %d %d %d %d\n", offset+4, offset+5, offset+6, offset+7)
-		fmt.Fprint(file, "f %d %d %d %d\n", offset, offset+1, offset+5, offset+4)
-		fmt.Fprint(file, "f %d %d %d %d\n", offset+1, offset+2, offset+6, offset+5)
-		fmt.Fprint(file, "f %d %d %d %d\n", offset+2, offset+3, offset+7, offset+6)
-		fmt.Fprint(file, "f %d %d %d %d\n", offset+3, offset, offset+4, offset+7)
+		fmt.Fprintf(file, "f %d %d %d %d\n", offset, offset+1, offset+2, offset+3)
+		fmt.Fprintf(file, "f %d %d %d %d\n", offset+4, offset+5, offset+6, offset+7)
+		fmt.Fprintf(file, "f %d %d %d %d\n", offset, offset+1, offset+5, offset+4)
+		fmt.Fprintf(file, "f %d %d %d %d\n", offset+1, offset+2, offset+6, offset+5)
+		fmt.Fprintf(file, "f %d %d %d %d\n", offset+2, offset+3, offset+7, offset+6)
+		fmt.Fprintf(file, "f %d %d %d %d\n", offset+3, offset, offset+4, offset+7)
 
 		vertexCount += 8
 		faceCount += 6

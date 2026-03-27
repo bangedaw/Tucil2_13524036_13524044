@@ -2,15 +2,14 @@ package main
 
 import (
 	"bufio"
-	"fmt"
+	"encoding/json"
+	"html/template"
 	"math"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
 )
-
-
 
 // Model menyimpan data geometri dari berkas .obj.
 type Model struct {
@@ -21,6 +20,7 @@ type Model struct {
 var currentModel Model
 
 // ObjtoModel membaca dan memuat berkas .obj ke dalam struktur Model.
+// (Fungsi ini tetap sama persis seperti buatan temanmu)
 func ObjtoModel(filename string) error {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -44,25 +44,22 @@ func ObjtoModel(filename string) error {
 		}
 
 		switch parts[0] {
-		case "v": // Titik Sudut (Vertex)
+		case "v":
 			if len(parts) >= 4 {
 				x, _ := strconv.ParseFloat(parts[1], 64)
 				y, _ := strconv.ParseFloat(parts[2], 64)
 				z, _ := strconv.ParseFloat(parts[3], 64)
 				vertices = append(vertices, Vector3{X: x, Y: y, Z: z})
 			}
-		case "f": // Permukaan (Face)
+		case "f":
 			var face []int
 			for _, p := range parts[1:] {
-				// Format .obj bisa v, v/vt, atau v/vt/vn. Kita hanya mengambil v.
 				vStr := strings.Split(p, "/")[0]
 				idx, err := strconv.Atoi(vStr)
 				if err == nil {
-					// Indeks .obj dimulai dari 1, sedangkan array Go dari 0.
 					if idx > 0 {
 						face = append(face, idx-1)
 					} else {
-						// Menangani indeks negatif (relatif)
 						face = append(face, len(vertices)+idx)
 					}
 				}
@@ -78,6 +75,7 @@ func ObjtoModel(filename string) error {
 }
 
 // normalizeModel menempatkan model di pusat origin (0,0,0) dan menyesuaikan ukurannya.
+// (Fungsi ini juga tetap sama)
 func normalizeModel(m Model) Model {
 	if len(m.Vertices) == 0 {
 		return m
@@ -106,104 +104,69 @@ func normalizeModel(m Model) Model {
 	return m
 }
 
-// renderSVG memproyeksikan titik 3D ke 2D dan menghasilkan format SVG.
-func renderSVG(m Model, rx, ry, scale float64) string {
-	var sb strings.Builder
-	width, height := 800.0, 600.0
-	centerX, centerY := width/2, height/2
-
-	sb.WriteString(fmt.Sprintf(`<svg width="100%%" height="100%%" viewBox="0 0 %.0f %.0f" xmlns="http://www.w3.org/2000/svg" style="background-color: #f4f4f9;">`, width, height))
-
-	// Konversi sudut rotasi ke radian
-	sinX, cosX := math.Sin(rx), math.Cos(rx)
-	sinY, cosY := math.Sin(ry), math.Cos(ry)
-
-	projected := make([]Vector3, len(m.Vertices))
-	for i, v := range m.Vertices {
-		// Rotasi sumbu Y
-		x1 := v.X*cosY - v.Z*sinY
-		z1 := v.X*sinY + v.Z*cosY
-		y1 := v.Y
-
-		// Rotasi sumbu X
-		y2 := y1*cosX - z1*sinX
-		// z2 := y1*sinX + z1*cosX (Z tidak diperlukan untuk proyeksi ortografis 2D)
-
-		// Proyeksi ortografis ke bidang 2D dan perbesaran skala
-		// Sumbu Y dibalik karena koordinat SVG dimulai dari kiri atas
-		projected[i] = Vector3{
-			X: x1*scale + centerX,
-			Y: -y2*scale + centerY, 
-		}
-	}
-
-	// Menggambar struktur kawat (wireframe)
-	sb.WriteString(`<g stroke="#2c3e50" stroke-width="1.5" fill="none">`)
-	for _, face := range m.Faces {
-		if len(face) < 3 {
-			continue
-		}
-		sb.WriteString(`<polygon points="`)
-		for _, idx := range face {
-			if idx >= 0 && idx < len(projected) {
-				sb.WriteString(fmt.Sprintf("%.2f,%.2f ", projected[idx].X, projected[idx].Y))
-			}
-		}
-		sb.WriteString(`" />`)
-	}
-	sb.WriteString(`</g></svg>`)
-
-	return sb.String()
-}
-
-// handleIndex melayani halaman web antarmuka pengguna.
+// handleIndex menyajikan halaman web tunggal sekaligus menyuntikkan data JSON
 func handleIndex(w http.ResponseWriter, r *http.Request) {
+	// Konversi struktur data Model Go kita menjadi format JSON
+	modelJSON, err := json.Marshal(currentModel)
+	if err != nil {
+		http.Error(w, "Gagal memproses model", http.StatusInternalServerError)
+		return
+	}
+
+	// HTML & JavaScript Terintegrasi
 	html := `<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Go 3D Object Viewer</title>
+    <title>Go 3D Object Viewer - Optimized</title>
     <style>
-        body { margin: 0; overflow: hidden; display: flex; flex-direction: column; height: 100vh; font-family: sans-serif; }
-        #viewer { flex-grow: 1; cursor: grab; }
-        #viewer:active { cursor: grabbing; }
-        .controls { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.8); padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        body { margin: 0; overflow: hidden; background-color: #f4f4f9; font-family: sans-serif; }
+        canvas { display: block; cursor: grab; }
+        canvas:active { cursor: grabbing; }
+        .controls { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
     <div class="controls">
-        <h3>Go 3D Viewer</h3>
-        <p>Tahan klik dan geser untuk <b>Rotasi</b>.<br>Gunakan scroll wheel untuk <b>Zoom</b>.</p>
+        <h3 style="margin-top:0;">Go 3D Viewer (Client-Side)</h3>
+        <p style="margin-bottom:0;">Tahan klik dan geser untuk <b>Rotasi</b>.<br>Gunakan scroll wheel untuk <b>Zoom</b>.</p>
     </div>
-    <div id="viewer"></div>
+    
+    <canvas id="viewer"></canvas>
 
     <script>
-        let rx = 0;      // Rotasi X dalam Radian
-        let ry = 0;      // Rotasi Y dalam Radian
-        let scale = 200; // Skala Perbesaran Dasar
-        
+        // Menerima suntikan data model 3D (Vertices dan Faces) dari server Go
+        const model = {{.ModelData}};
+
+        const canvas = document.getElementById('viewer');
+        const ctx = canvas.getContext('2d');
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        // Auto-resize canvas jika jendela browser diubah ukurannya
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            draw();
+        });
+
+        let rx = 0.5; // Rotasi awal X
+        let ry = -0.5; // Rotasi awal Y
+        let scale = Math.min(width, height) / 3;
+
         let isDragging = false;
-        let lastMouseX = 0;
-        let lastMouseY = 0;
-        let isRendering = false;
+        let lastX = 0;
+        let lastY = 0;
 
-        const viewer = document.getElementById('viewer');
-
-        function requestRender() {
-            if (isRendering) return;
-            isRendering = true;
-            fetch('/render?rx=' + rx + '&ry=' + ry + '&scale=' + scale)
-                .then(response => response.text())
-                .then(svg => {
-                    viewer.innerHTML = svg;
-                    isRendering = false;
-                });
-        }
-
-        viewer.addEventListener('mousedown', (e) => {
+        canvas.addEventListener('mousedown', (e) => {
             isDragging = true;
-            lastMouseX = e.clientX;
-            lastMouseY = e.clientY;
+            lastX = e.clientX;
+            lastY = e.clientY;
         });
 
         window.addEventListener('mouseup', () => {
@@ -212,45 +175,69 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
         window.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
-            const deltaX = e.clientX - lastMouseX;
-            const deltaY = e.clientY - lastMouseY;
+            const deltaX = e.clientX - lastX;
+            const deltaY = e.clientY - lastY;
             
-            // Sensitivitas Rotasi
             ry += deltaX * 0.01;
             rx += deltaY * 0.01;
             
-            lastMouseX = e.clientX;
-            lastMouseY = e.clientY;
+            lastX = e.clientX;
+            lastY = e.clientY;
             
-            requestRender();
+            // requestAnimationFrame memastikan render mulus sesuai refresh rate monitor
+            requestAnimationFrame(draw);
         });
 
-        viewer.addEventListener('wheel', (e) => {
+        canvas.addEventListener('wheel', (e) => {
             e.preventDefault();
-            scale += e.deltaY * -0.2;
-            if (scale < 10) scale = 10; 
-            requestRender();
+            scale += e.deltaY * -0.5;
+            if (scale < 10) scale = 10;
+            requestAnimationFrame(draw);
         }, { passive: false });
 
-        requestRender();
+        // Fungsi utama untuk kalkulasi matematika 3D dan menggambar ke Canvas
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.strokeStyle = '#2c3e50';
+            ctx.lineWidth = 1.0;
+
+            const sinX = Math.sin(rx);
+            const cosX = Math.cos(rx);
+            const sinY = Math.sin(ry);
+            const cosY = Math.cos(ry);
+
+            const cx = width / 2;
+            const cy = height / 2;
+
+            // Memproyeksikan array Vertices 3D ke kooordinat 2D
+            const projected = model.Vertices.map(v => {
+                const x1 = v.X * cosY - v.Z * sinY;
+                const z1 = v.X * sinY + v.Z * cosY;
+                const y1 = v.Y;
+                const y2 = y1 * cosX - z1 * sinX;
+                return { x: x1 * scale + cx, y: -y2 * scale + cy };
+            });
+
+            // Menggambar garis wajah (faces) ke layar
+            ctx.beginPath();
+            model.Faces.forEach(face => {
+                if (face.length < 3) return;
+                ctx.moveTo(projected[face[0]].x, projected[face[0]].y);
+                for (let i = 1; i < face.length; i++) {
+                    ctx.lineTo(projected[face[i]].x, projected[face[i]].y);
+                }
+                ctx.closePath();
+            });
+            ctx.stroke();
+        }
+
+        // Render pertama kali saat halaman dimuat
+        draw();
     </script>
 </body>
 </html>`
-	w.Header().Set("Content-Type", "text/html")
-	w.Write([]byte(html))
-}
 
-// handleRender menerima parameter transformasi dari klien dan mengembalikan SVG.
-func handleRender(w http.ResponseWriter, r *http.Request) {
-	rx, _ := strconv.ParseFloat(r.URL.Query().Get("rx"), 64)
-	ry, _ := strconv.ParseFloat(r.URL.Query().Get("ry"), 64)
-	scale, _ := strconv.ParseFloat(r.URL.Query().Get("scale"), 64)
-
-	if scale == 0 {
-		scale = 200 // Skala bawaan (fallback)
-	}
-
-	svgOutput := renderSVG(currentModel, rx, ry, scale)
-	w.Header().Set("Content-Type", "image/svg+xml")
-	w.Write([]byte(svgOutput))
+	// Menyuntikkan JSON ke dalam template HTML
+	t := template.Must(template.New("index").Parse(html))
+	t.Execute(w, struct{ ModelData template.JS }{template.JS(modelJSON)})
 }

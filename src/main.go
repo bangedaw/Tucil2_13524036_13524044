@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"sync"
 	"time"
-	"net/http"
 )
 
 func main() {
@@ -42,17 +42,15 @@ func main() {
 
 	PrintReport(stats, len(solidVoxels), numVertices, numFaces, maxDepth, executionTime, outputFile)
 
-	fmt.Println("\nMembuka Interactive Viewer...")
+	fmt.Println("\nMembuka Interactive Viewer di http://localhost:8080 ...")
 	if err := ObjtoModel(outputFile); err != nil {
 		log.Fatalf("Gagal memuat model untuk viewer: %v", err)
 	}
 
 	http.HandleFunc("/", handleIndex)
-	http.HandleFunc("/render", handleRender)
 
 	port := ":8080"
-
 	if err := http.ListenAndServe(port, nil); err != nil {
-		fmt.Printf("Viewer Error", err)
+		fmt.Printf("Viewer Error: %v\n", err)
 	}
 }

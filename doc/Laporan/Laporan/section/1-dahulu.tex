@@ -1,0 +1,160 @@
+\section{Deskripsi Penugasan}\label{sec:Pendahuluan} % (fold)
+Queens adalah gim logika yang tersedia pada situs jejaring
+profesional LinkedIn. Tujuan dari gim ini adalah menempatkan
+\textit{queen} pada sebuah papan persegi berwarna sehingga terdapat
+hanya satu \textit{queen} pada tiap baris, kolom, dan daerah warna.
+Selain itu, satu \textit{queen} tidak dapat ditempatkan bersebelahan
+dengan \textit{queen} lainnya, termasuk secara diagonal.
+
+Tugas anda adalah membuat program yang dapat menemukan satu solusi
+penempatan \textit{queen} pada suatu papan berwarna yang diberkan
+atau menmpilkan bahwa tidak ada solusi yang valid. Program melakukan
+solusi menggunakan algoritma brute force.
+
+Misal, diberikan papan sebagai berikut. Untuk tugas ini, papan selalu
+dimulai kosong.
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{figures/input.png}
+    \end{center}
+    \caption{Papan Permainan Queens}
+\end{figure}
+
+Di bawah ini satu-satunya solusi valid. Perhatikan bahwa tiap baris,
+kolom, dan daerahj warna sudah memiliki satu ditempati satu \textit{queen}.
+
+\begin{figure}[htbp]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{figures/output.png}
+    \end{center}
+    \caption{Solusi Permainan Queen}
+\end{figure}
+
+% section Pendahuluan (end)
+
+\section{Spesifikasi Tugas}\label{sec:Spesifikasi Tugas} % (fold)
+\subsection{Spesifikasi Wajib}\label{sub:Spesifikasi Wajib} % (fold)
+\begin{itemize}[label=\textbullet]
+    \item Buatlah sebuah program sederhana dalam bahasa Java, Python,
+        C++, C, atau GO yang mengimplementasikan \textbf{algoritma
+        \textit{Brute Force}} untuk mencari solusi dalam permainan
+        \textit{Queens}.
+    \item Algoritma \textit{brute force} yang dimaksud harus bersifat
+        murni, tidak menggunakan heuristik apapun.
+    \item \textbf{Input:} program akan memberikan pengguna sebuah
+        arahan pada terminal (jika tidak mengerjakan bonus) untuk
+        memilih file test case berekstensi .txt, kemudian program
+        membaca file test case tersebut yang berisi konfigurasi awal
+        dari papan \textit{Queens} yang akan diselesaikan. Perhatikan
+        bahwa input dapat memiliki ukuran papan yang berbeda-beda,
+        serta program harus dapat memvalidasi apakah input yang
+        diberikan merupakan input valid atau bukan.
+\end{itemize}
+
+\noindent Berikut adalah contoh file .txt yang akan dijadikan sebagai input:
+
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, boxrule=0.5pt]
+\begin{verbatim}
+AAABBCCCD
+ABBBBCECD
+ABBBDCECD
+AAABDCCCD
+BBBBDDDDD
+FGGGDDHDD
+FGIGDDHDD
+FGIGDDHDD
+FGGGDDHHH
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{itemize}[label=\textbullet]
+    \item \textbf{Output:}
+        \begin{enumerate}
+            \item Menampilkan hasil akhir dari papan yang sudah
+                terisi oleh \textit{queens} dengan aturan yang benar.
+            \item Menampilkan banyak konfigurasi atau iterasi yang
+                ditinjau oleh algoritma.
+            \item Menampilkan waktu eksekusi program dalam
+                \textit{millisecond} (cukup waktu pencarian dengan
+                algoritma, tidak termasuk membaca dan menulis file).
+            \item \textit{Live Update:} program harus dapat
+                memvisualisasikan proses \textit{brute force} yang dilakukan.
+        \end{enumerate}
+\end{itemize}
+
+\noindent Berikut adalah contoh output berdasarkan contoh input diatas:
+
+\begin{tcolorbox}[colback=white, colframe=black, sharp corners, boxrule=0.5pt]
+\begin{verbatim}
+AAABBCC#D
+ABBB#CECD
+ABBBDC#CD
+A#ABDCCCD
+BBBBD#DDD
+FGG#DDHDD
+#GIGDDHDD
+FG#GDDHDD
+FGGGDDHH#
+
+Waktu pencarian: 120 ms
+Banyak kasus yang ditinjau: 1000 kasus
+Apakah Anda ingin menyimpan solusi? (Ya/Tidak)
+\end{verbatim}
+\end{tcolorbox}
+
+% subsection Spesifikasi Wajib (end)
+
+\subsection{Spesifikasi Bonus}\label{sub:Spesifikasi Bonus} % (fold)
+Poin maksimal untuk bonus adalah 10.
+\begin{itemize}
+    \item Membuat GUI (\textit{Graphical User Interface} untuk
+            program secara keseluruhan yang dapat memberi
+            \textit{input} dan memberi visualisasi (8 poin).
+        \item \textit{Input as image}, \textit{input} dari program
+            adalah sebuah gambar yang merupakan konfigurasi dari
+            papan awal. (5 poin)
+        \item \textit{Output as image}, \textit{output} dari hasil
+            peletakan \textit{queens} diberikan dalam bentuk gambar. (2 poin)
+    \end{itemize}
+
+    % subsection Spesifikasi Bonus (end)
+    % section Spesifikasi Tugas (end)
+
+    \section{Dasar Teori}\label{sec:Dasar Teori} % (fold)
+    \subsection{Brute Force}\label{sub:Brute Force} % (fold)
+    Algoritma \textit{Brute Force} adalah sebuah pendekatan yang
+    menyelesaikan persoalan secara lempang
+    (\textit{straightforward}). Algoritma ini didasarkan langsung
+    pada pernyataan persoalan (\textit{problem statement}) dan
+    definisi konsep yang terlibat. Secara harfiah, kata
+    "\textit{force}" mengindikasikan penggunaan "tenaga" komputasi
+    ketimbang kecerdasan algoritma. Algoritma ini lebih cocok untuk
+    persoalan dengan ukuran masukan yang kecil, karena
+    langkah-langkah penyelesaiannya cenderung sederhana dan
+    implementasinya mudah. Algoritma \textit{brute force} dapat
+    diterapkan untuk memecahkan semua persoalan dan menjamin solusi
+    persoalannya, jika ada.
+    % subsection Brute Force (end)
+
+    \subsection{Multithreading dalam Java}\label{sub:Multithreading} % (fold)
+    \textit{Multithreading} adalah kemampuan sebuah program untuk
+    menjalankan beberapa tugas secara paralel dalam satu waktu. Dalam
+    JavaFX, terdapat satu \textit{thread} utama yang disebut JavaFX
+    Application Thread yang bertanggung jawab untuk menangani UI.
+    \textit{Multithreading} digunakan agar algoritma \textit{brute
+    force} tetap berjalan selagi tampilan di GUI tetap terbarui
+    (\textit{Live Update}). Dalam Java, \textit{multithreading} dapat
+    diimplementasikan dengan membuat objek \texttt{Thread} yang sebuah fungsi.
+
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    new Thread(() -> {
+        // Pemanggilan fungsi untuk Thread utama
+        Solver.solve() -> {
+            // Kembali ke fungsi lain
+        Platform.runLater(() -> Main.GUI());
+    });
+}).start();
+\end{lstlisting}
+
+    % subsection Multithreading (end)
+    % section Dasar Teori (end)

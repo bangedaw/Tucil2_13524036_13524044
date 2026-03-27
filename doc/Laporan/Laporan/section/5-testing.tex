@@ -1,0 +1,227 @@
+\section{Pengujian}\label{sec:Pengujian} % (fold)
+Untuk memastikan program berjalan dengan benar, dilakukan beberapa
+pengujian dengan beberapa kasus uji (\textit{test case}. Kasus uji
+    yang digunakan adalah sebagai berikut.
+    \begin{enumerate}
+        \item Kasus Uji $4 \times 4$
+        \item Kasus Uji $9 \times 9$
+        \item Kasus Uji $10 \times 10$
+        \item Kasus Uji Tidak Valid
+            \begin{itemize}
+                \item Papan Sangat Sempit
+                \item Jumlah Baris $\ne$ Kolom
+                \item Jumlah Baris $\ne$ Jumlah Warna
+                \item \textit{File input} tidak valid
+            \end{itemize}
+    \end{enumerate}
+
+    \pagebreak
+
+    \subsection{Kasus Uji 1}\label{sub:Kasus Uji 1} % (fold)
+
+    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
+        boxrule=0.5pt]
+\begin{verbatim}
+AABB
+AABB
+CCDD
+CCDD
+\end{verbatim}
+    \end{tcolorbox}
+
+    \begin{itemize}
+        \item Deskripsi: Papan $4 \times 4$
+        \item Output:
+            \begin{figure}[htbp]
+                \begin{center}
+                    \includegraphics[width=\textwidth]{figures/tc1.png}
+                \end{center}
+                \caption{Hasil Kasus Uji 1}
+            \end{figure}
+
+    \end{itemize}
+    % subsection Kasus Uji 1 (end)
+
+    \subsection{Kasus Uji 2}\label{sub:Kasus Uji 2} % (fold)
+    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
+        boxrule=0.5pt]
+\begin{verbatim}
+AAABBCCCD
+ABBBBCECD
+ABBBDCECD
+AAABDCCCD
+BBBBDDDDD
+FGGGDDHDD
+FGIGDDHDD
+FGIGDDHDD
+FGGGDDHHH
+\end{verbatim}
+    \end{tcolorbox}
+
+    \begin{itemize}
+        \item Deskripsi: Papan $9 \times 9$
+        \item Output:
+            \begin{figure}[htbp]
+                \begin{center}
+                    \includegraphics[width=0.7\textwidth]{figures/tc2.png}
+                \end{center}
+                \caption{Hasil Kasus Uji 2}
+            \end{figure}
+
+    \end{itemize}
+
+    % subsection Kasus Uji 2 (end)
+
+    \subsection{Kasus Uji 3}\label{sub:Kasus Uji 3} % (fold)
+    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
+        boxrule=0.5pt]
+\begin{verbatim}
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+ABCDEFGHIJ
+\end{verbatim}
+    \end{tcolorbox}
+
+    \begin{itemize}
+        \item Deskripsi: Papan $10 \times 10$
+        \item Output:
+            \begin{figure}[htbp]
+                \begin{center}
+                    \includegraphics[width=0.7\textwidth]{figures/tc3.png}
+                \end{center}
+                \caption{Hasil Kasus Uji 3}
+            \end{figure}
+
+    \end{itemize}
+
+    % subsection Kasus Uji 3 (end)
+
+    \subsection{Kasus Uji 4}\label{sub:Kasus Uji 4} % (fold)
+    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
+        boxrule=0.5pt]
+\begin{verbatim}
+ABC
+ABC
+ABC
+\end{verbatim}
+    \end{tcolorbox}
+
+    \begin{itemize}
+        \item Deskripsi: Papan $3 \times 3$ (Papan terlalu sempit
+            tidak ada solusi)
+        \item Output:
+            \begin{figure}[htbp]
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{figures/tc4.png}
+                \end{center}
+                \caption{Hasil Kasus Uji 4}
+            \end{figure}
+    \end{itemize}
+    % subsection Kasus Uji 4 (end)
+
+    \subsection{Kasus Uji 5}\label{sub:Kasus Uji 5} % (fold)
+    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
+        boxrule=0.5pt]
+\begin{verbatim}
+AA
+BB
+BB
+\end{verbatim}
+    \end{tcolorbox}
+
+    \begin{itemize}
+        \item Deskripsi: Papan $3 \times 2$ (Jumlah Baris dan Kolom tidak sama)
+        \item Output:
+            \begin{figure}[htbp]
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{figures/tc5.png}
+                \end{center}
+                \caption{Hasil Kasus Uji 5}
+            \end{figure}
+    \end{itemize}
+    % subsection Kasus Uji 5 (end)
+
+    \subsection{Kasus Uji 6}\label{sub:Kasus Uji 6} % (fold)
+    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
+        boxrule=0.5pt]
+\begin{verbatim}
+ABCDD
+ABCDD
+ABCDD
+ABCDD
+ABCDD
+\end{verbatim}
+    \end{tcolorbox}
+
+    \begin{itemize}
+        \item Deskripsi: Jumlah Baris ($5$) dengan Jumlah Warna ($4$) tidak sama
+        \item Output:
+            \begin{figure}[htbp]
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{figures/tc6.png}
+                \end{center}
+                \caption{Hasil Kasus Uji 7}
+            \end{figure}
+    \end{itemize}
+
+    % subsection Kasus Uji 6 (end)
+
+    \subsection{Kasus Uji 7}\label{sub:Kasus Uji 7} % (fold)
+    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
+        boxrule=0.5pt]
+\begin{verbatim}
+    random.txt
+\end{verbatim}
+    \end{tcolorbox}
+
+    \begin{itemize}
+    \item Deskripsi: \textit{File input} tidak valid)
+    \item Output:
+        \begin{figure}[htbp]
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{figures/tc7.png}
+            \end{center}
+            \caption{Hasil Kasus Uji 7}
+        \end{figure}
+\end{itemize}
+% subsection Kasus Uji 7 (end)
+
+\pagebreak
+
+\subsection{Hasil Pengujian}\label{sub:Hasil Pengujian} % (fold)
+Berikut adalah ringkasan hasil pengujian kasus uji yang sudah
+dilakukan beserta waktu penyelesaian dan banyak kasus yang ditinjau.
+\begin{table}[!htbp]
+    \begin{center}
+        \begin{tabular}[\textwidth]{|c|L{4cm}|c|c|c|}
+            \hline
+            \textbf{No} & \textbf{Deskripsi Kasus} & \textbf{Ukuran} &
+            \textbf{Waktu} & \textbf{Banyak Kasus} \\
+            \hline
+            1 & Kasus Normal & $4 \times 4$ & $\sim0$ ms & 115 kasus \\
+            \hline
+            2 & Kasus Normal & $9 \times 9$ & $304$ ms & 11.775.509 kasus \\
+            \hline
+            3 & Kasus Normal & $10 \times 10$ & $5159$ ms & 241.357.969 kasus \\
+            \hline
+            4 & Papan Terlalu Sempit & $3 \times 3$ & N/A & Tidak ada solusi \\
+            \hline
+            5 & Baris $\neq$ Kolom & $3 \times 2$ & N/A & Input tidak valid \\
+            \hline
+            6 & Baris $\neq$ Warna & $5 \times 5$ & N/A & Input tidak valid \\
+            \hline
+            7 & File Tidak Ditemukan & - & N/A & Input tidak valid \\
+            \hline
+        \end{tabular}
+        \caption{Ringkasan Hasil Pengujian Kasus Uji}
+    \end{center}
+\end{table}
+% subsection Hasil Pengujian (end)
+% section Pengujian (end)

@@ -1,0 +1,166 @@
+\section{Implementasi Spesifikasi Wajib}\label{sec:Implementasi
+Spesifikasi Wajib} % (fold)
+\subsection{Algoritma Utama}\label{sub:Algoritma Utama} % (fold)
+
+Algoritma UtamaAlgoritma ini akan mencoba untuk menempatkan satu ratu
+pada setiap baris secara sistematis dan memeriksa validitasnya. Untuk
+membantu algoritma ini, dibuat beberapa struktur data, yaitu:
+\begin{itemize}
+    \item \texttt{Board} digunakan sebagai representasi fisik dari
+        papan permainan. Struktur data ini diimplementasikan
+        menggunakan matriks atau \textit{array} dua dimensi. Setiap
+        elemen dalam \textit{array} menyimpan warna dalam petak.
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    public static String[][] board;
+\end{lstlisting}
+
+    \item \texttt{Koordinat} digunakan untuk menyimpan koordinat pada
+        \textit{board}. \texttt{Koordinat} diimplementasikan
+        menggunakan struktur data \textit{record} dari Java. Setiap
+        \textit{record} menyimpan koordinat dalam papan dengan $x$
+        sebagai baris dan $y$ sebagai kolom.
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    public record Koordinat(int x, int y) {}
+\end{lstlisting}
+    \item \texttt{Koordinat[] queenLocation} digunakan untuk
+        menyimpan \textit{set of queens} yang sedang divalidasi.
+    \begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    Koordinat[] queenLocation = new Koordinat[n];
+    for (int i = 0; i < queenLocation.length; i++) {
+        queenLocation[i] = new Koordinat(i, 0);
+    }
+\end{lstlisting}
+
+    \item \textit{HashSet} \texttt{uniqueColor} yang digunakan untuk
+        menyimpan setiap warna yang ada di papan untuk dihitung
+        jumlah warna yang terdapat di dalam papan.
+    \begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    Set<String> uniqueColor = new HashSet<>();
+\end{lstlisting}
+
+\end{itemize}
+
+Berikut adalah langkah-langkah algoritmanya:
+\begin{enumerate}
+    \item Program membuat \textit{array of Record}
+        \texttt{queenLocation} berukuran $N$. Di mana setiap elemen
+        array menyimpan koordinat $(x, y)$, di mana $x$ adalah baris
+        $[0..N -1]$ dan $y$ adalah kolom yang awalnya diinisialisasi dengan $0$.
+    \item Program memasuki \textit{infinite loop} dengan
+        \texttt{while (true)} untuk mengevaluasi setiap kemungkinan
+        penempatan ratu. Pada setiap iterasi, program mengecek apakah
+        konfigurasi ratu saat ini sudah memenuhi aturan-aturan berikut.
+        \begin{itemize}
+            \item Tidak ada dua ratu di kolom yang sama
+            \item Tidak ada dua ratu di wilayah warna yang sama
+            \item Tidak ada dua ratu yang saling bersebelahan,
+                termasuk secara diagonal
+        \end{itemize}
+    \item Jika konfigurasi memenuhi aturan, maka algoritma berhenti
+        dan mengembalikan lokasi ratu.
+    \item Jika konfigurasi tidak memenuhi aturan, maka program akan
+        menggeser ratu
+        \begin{itemize}
+            \item Mulai dari baris pertama. Jika kolom belum mencapai
+                indeks maksimal $N-1$, geser kolom ratu ke bawah
+                sebesar 1 petak.
+            \item Jika kolom sudah mencapai indeks maksimal,
+                kembalikan kolom ke 0, lalu pindah ke baris berikutnya.
+            \item Ulangi hingga seluruh kemungkinan teriterasi atau
+                solusi ditemukan.
+        \end{itemize}
+    \item Jika tidak ditemukan solusi hingga akhir, maka program
+        berhenti dan menyatakan tidak ada soluti.
+\end{enumerate}
+
+Algoritma ini memiliki kompleksitas waktu algoritma sebesar $O(N^N$,
+    sehingga untuk $N$ yang sangat besar memakan waktu yang sangat lama.
+    % subsection Algoritma Utama (end)
+
+    \subsection{Algoritma Utama dalam Java}\label{sub:Algoritma Utama
+    dalam Java} % (fold)
+
+Algoritma Utama dalam Java\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+public static boolean solve(Koordinat[] queenLocation, Consumer<Koordinat[]> onStep) {
+    int n = board.length;
+
+    while (true) {
+        totalKasus++;
+
+        if (validSolution(queenLocation)) {
+            return true;
+        }
+
+        int baris = 0;
+        while (baris < n) {
+            int kolom = queenLocation[baris].y;
+            if (kolom < n - 1) {
+                queenLocation[baris] = new Koordinat(baris, kolom + 1);
+                break;
+            } else {
+                queenLocation[baris] = new Koordinat(baris, 0);
+                baris++;
+            }
+        }
+
+        if (baris == n) {
+            break;
+        }
+    }
+    return false;
+}
+\end{lstlisting}
+    % subsection Algoritma Utama dalam Java (end)
+
+    \subsection{Fungsi Pembantu}\label{sub:Fungsi Pembantu} % (fold)
+    Untuk membantu berjalannya program utama, digunakan beberapa
+    fungsi pembantu seperti.
+    \begin{enumerate}
+        \item \texttt{validSolution()}. Fungsi ini mengambil input
+            berupa \textit{list of Record} \texttt{Koordinat[]
+            queenLocation} dan mengembalikan \texttt{boolean}. Fungsi
+            ini berfungsi untuk mengecek apakah konfigurasi
+            \textit{queens} saat ini sudah memenuhi syarat.
+        \begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    public static boolean validSolution(Koordinat[] queenLocation) { ... }
+\end{lstlisting}
+
+        \item \texttt{checkColor()}. Fungsi ini mengambil sebuah
+            \textit{record} dan mengembalikan \texttt{string} yang
+            berisi label warna dari sebuah koordinat.
+    \begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    public static String checkColor(Koordinat queen) { ... }
+\end{lstlisting}
+
+        \item \texttt{colorCount()}. Fungsi ini mengembalikan
+            \texttt{integer} jumlah total warna yang ada dalam papan.
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    public static int colorCount() {
+        Set<String> uniqueColor = new HashSet<>();
+        ...
+        return uniqueColor.size();
+    }
+\end{lstlisting}
+
+        \item \texttt{loadBoard()}. Fungsi ini mengambil sebuah
+            \texttt{string} berisi \textit{path file} \texttt{.txt}
+            dan mengembalikan \texttt{boolean} apakah \textit{file}
+            tersebut merupakan konfigurasi papan yang valid.
+    \begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    public static boolean loadBoard(String filePath) {
+        ...
+        return board.length == colorCount();
+    }
+\end{lstlisting}
+
+        \item \texttt{printBoard()}. Fungsi ini mengambil sebuah
+            konfigurasi ratu dan mencetak papan ke terminal.
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    public static void printBoard(Koordinat[] queenLocation) {
+       if (isQueen) System.out.print("#");
+        else System.out.print(board[i][j]);
+    }
+\end{lstlisting}
+    \end{enumerate}
+    % subsection Fungsi Pembantu (end)
+    % section Implementasi Spesifikasi Wajib (end)

@@ -1,0 +1,84 @@
+\section{Implementasi Spesifikasi Bonus}\label{sub:Implementasi
+Spesifikasi Bonus} % (fold)
+\subsection{GUI}\label{sub:GUI} % (fold)
+
+Dalam \texttt{Main.java}, struktur komponen digunakan sebagai berikut.
+\begin{itemize}
+    \item Stage \& Scene sebagai kontainer utama.
+    \item VBox (Root). Layout utama untuk elemen disusun secara vertikal.
+    \item Hbox. Baris horizontal berisi \texttt{TextField} untuk
+        \textit{input} nama \textit{file} dan \texttt{Button} untuk
+        memulai penyelesaian.
+    \item GridPane. Komponen untuk me-\textit{render} papan.
+\end{itemize}
+
+Untuk memastikan GUI tetap responsif saat menjalankan algoritma,
+program ini menerapkan \textit{multithreading} untuk memisahkan
+perhitungan algoritma dengan menampilkan hasil perhitungan.
+\begin{enumerate}
+    \item Algoritma \texttt{Solver.solve} dijalankan di dalam
+        \textit{thread} terpisah.
+    \item \texttt{Solver} menerima objek \texttt{Consumer}.
+    \item \texttt{Platform.runLater()} memperbarui tampilan papan
+        dari \textit{thread} dari nomor 1.
+\end{enumerate}
+
+Fungsi \texttt{renderBoard} merupakan fungsi utama yang menampilkan
+\texttt{String[]][] board} dari \texttt{Solver} dalam GUI.
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+     private void renderBoard(String[][] board, Solver.Koordinat[] solution) {
+        boardGrid.getChildren().clear();
+        int n = board.length;
+
+        double cellSize = Math.min(600.0 / n, 50.0);
+        double fontSize = cellSize * 0.5;
+
+        generateColorMap(board);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                StackPane cell = new StackPane();
+                Rectangle rect = new Rectangle(cellSize, cellSize);
+                rect.setFill(colorMap.getOrDefault(board[i][j], Color.LIGHTGRAY));
+                rect.setStroke(Color.BLACK);
+                rect.setStrokeWidth(0.2);
+                cell.getChildren().add(rect);
+
+                for (Solver.Koordinat q : solution) {
+                    if (q.x() == i && q.y() == j) {
+                        Label queenLabel = new Label("#");
+                        queenLabel.setStyle(
+                                "-fx-font-size: " + fontSize + "px; -fx-text-fill: black;");
+                        cell.getChildren().add(queenLabel);
+                    }
+                }
+                boardGrid.add(cell, j, i);
+            }
+        }
+    }
+\end{lstlisting}
+
+Algoritma ini merubah koordinat dalam \texttt{board} dengan
+\textit{cell} dengan warna yang berbeda-beda yang diberikan oleh
+fungsi \texttt{generateColorMap}.
+% subsection GUI (end)
+
+\subsection{Output as Image}\label{sub:Output as Image} % (fold)
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+    private void saveAsImage(String fileName) {
+    try {
+        WritableImage snapshot = boardGrid.snapshot(null, null);
+        File outputFile = new File("src/main/output/" + fileName + ".png");
+        ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", outputFile);
+        System.out.println("Papan berhasil disimpan sebagai gambar: " + outputFile.getAbsolutePath());
+    } catch (Exception e) {
+        System.out.println("Gagal menyimpan gambar: " + e.getMessage());
+    }
+}
+\end{lstlisting}
+
+Algoritma ini mengambil tangkapan dari \texttt{boardGrid}, lalu
+menyimpannya dalam \textit{folder} \texttt{src/main/output/}. Untuk
+keseragaman \textit{output} dikonversi menuju format \texttt{.png}.
+% subsection Output as Image (end)
+% section Implementasi Spesifikasi Bonus (end)

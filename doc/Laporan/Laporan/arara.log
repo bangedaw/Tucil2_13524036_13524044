@@ -1,0 +1,482 @@
+18 Feb 2026 03:38:54.533 INFO  - 
+Welcome to arara 7.1.5!
+-----------------------------------------------------------------
+18 Feb 2026 03:38:54.535 DEBUG - 
+::: arara @ /usr/share/texmf-dist/scripts/arara
+::: Java 21.0.9, Arch Linux
+::: /usr/lib/jvm/java-21-openjdk
+::: Linux, amd64, 6.17.9-arch1-1
+::: user.home @ /home/raulin
+::: CF @ [none]
+-----------------------------------------------------------------
+18 Feb 2026 03:38:54.541 INFO  - Processing "Laporan-Tucil1-IF2211-2026.tex" (size: 429 B, last modified: 2026-02-17 20:37:07), please wait.
+18 Feb 2026 03:38:54.546 INFO  - I found a potential pattern in line 1: pdflatex
+18 Feb 2026 03:38:54.548 INFO  - All directives were validated. We are good to go.
+-------------------------- DIRECTIVES ---------------------------
+Directive(identifier='pdflatex', parameters={reference=/home/raulin/Documents/Important/IF24-ITB/04-Semester-4/02-Strategi-Algoritma-IF2221/Tucil-1-Queens/doc/Laporan/Laporan-Tucil1-IF2211-2026.tex},conditional={ NONE }, lineNumbers=[1])
+-----------------------------------------------------------------
+18 Feb 2026 03:38:54.549 INFO  - I am ready to interpret rule "pdflatex".
+18 Feb 2026 03:38:54.550 INFO  - Rule location: "/usr/share/texmf-dist/scripts/arara/rules"
+18 Feb 2026 03:38:54.615 INFO  - I am ready to interpret task "PDFLaTeX engine" from rule "PDFLaTeX".
+18 Feb 2026 03:38:54.616 INFO  - System command: [pdflatex, Laporan-Tucil1-IF2211-2026.tex] @ /home/raulin/Documents/Important/IF24-ITB/04-Semester-4/02-Strategi-Algoritma-IF2221/Tucil-1-Queens/doc/Laporan
+18 Feb 2026 03:38:56.876 INFO  -                 ---------------------- BEGIN OUTPUT BUFFER ----------------------
+                This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Laporan-Tucil1-IF2211-2026.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size10.clo))
+(/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def))) (./preamble.sty
+(/usr/share/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/share/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/share/texmf-dist/tex/latex/totpages/totpages.sty
+(/usr/share/texmf-dist/tex/latex/everyshi/everyshi.sty))
+(/usr/share/texmf-dist/tex/latex/tools/array.sty)
+(/usr/share/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(/usr/share/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texmf-dist/tex/latex/caption/caption3.sty))
+(/usr/share/texmf-dist/tex/latex/caption/subcaption.sty)
+(/usr/share/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-dist/tex/latex/physics/physics.sty
+(/usr/share/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))))
+(/usr/share/texmf-dist/tex/latex/tools/tabularx.sty)
+(/usr/share/texmf-dist/tex/latex/svg/svg.sty
+(/usr/share/texmf-dist/tex/latex/koma-script/scrbase.sty
+(/usr/share/texmf-dist/tex/latex/koma-script/scrlfile.sty
+(/usr/share/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+(/usr/share/texmf-dist/tex/latex/koma-script/scrlogo.sty))))
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty)
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty))
+(/usr/share/texmf-dist/tex/latex/trimspaces/trimspaces.sty)
+(/usr/share/texmf-dist/tex/latex/tools/shellesc.sty))
+(/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texmf-dist/tex/latex/transparent/transparent.sty
+(/usr/share/texmf-dist/tex/latex/transparent/transparent-nometadata.sty
+(/usr/share/texmf-dist/tex/latex/auxhook/auxhook.sty)))
+(/usr/share/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def)
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/pgf.revision.tex)))
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.te
+x)) (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg)
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def)))
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex))
+(/usr/share/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code
+.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.te
+x) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics
+.code.tex) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex)
+
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.t
+ex) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.te
+x) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex)
+ (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex)))
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex)
+(/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty)
+(/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty))
+(/usr/share/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.te
+x) (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+topaths.code.tex))) (/usr/share/texmf-dist/tex/latex/circuitikz/circuitikz.sty
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+calc.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+bending.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmodulebending.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmodulenonlineartransformation
+s.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibrarycurvilinear.code.tex
+)))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+fpu.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex))
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirc.defines.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircutils.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircpath.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircshapes.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircmonopoles.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircbipoles.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirctripoles.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircquadpoles.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircmultipoles.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirclabel.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircvoltage.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcirccurrent.tex)
+(/usr/share/texmf-dist/tex/generic/circuitikz/pgfcircflow.tex))
+(/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-euclide.sty
+2024/04/19 5.10c tkz-euclide.sty
+
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+angles.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+arrows.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+backgrounds.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.markings.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
+ons.markings.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.pathreplacing.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
+ons.pathreplacing.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.shapes.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
+ons.shapes.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.text.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
+ons.text.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+decorations.pathmorphing.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorati
+ons.pathmorphing.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+intersections.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.t
+ex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+math.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+plotmarks.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex))
+
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+positioning.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+quotes.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+shapes.misc.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.c
+ode.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+through.code.tex) (/usr/share/texmf-dist/tex/latex/l3packages/xfp/xfp.sty)
+(/usr/share/texmf-dist/tex/latex/xpatch/xpatch.sty
+(/usr/share/texmf-dist/tex/latex/etoolbox/etoolbox.sty))
+Local configuration file tkz-euclide.cfg found and used
+(/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-euclide.cfg
+2024/04/19 5.10c tkz-euclide.cfg
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-base.tex
+2024/04/19 5.10c tkz-tools-eu-base.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-utilities.tex
+2024/04/19 5.10c tkz-tools-eu-utilities.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-BB.tex
+2024/04/19 5.10c tkz-obj-eu-BB.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-grids.tex
+2024/04/19 5.10c tkz-obj-eu-grids.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-lib-eu-marks.tex
+2024/04/19 5.10c tkz-lib-eu-marks.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-text.tex
+2024/04/19 5.10c tkz-tools-eu-text.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-lib-eu-shape.tex
+2024/04/19 5.10c tkz-lib-eu-shape.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-axesmin.tex
+2024/04/19 5.10c tkz-obj-eu-axesmin
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-colors.tex
+2024/04/19 5.10c tkz-tools-eu-colors
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-points.tex
+2024/04/19 5.10c tkz-obj-eu-points.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-points.tex
+2024/04/19 5.10c tkz-draw-eu-points.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-points.tex
+2024/04/19 5.10c tkz-obj-eu-points.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-points-by.tex
+2024/04/19 5.10c tkz-tools-eu-points-by.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-math.tex
+2024/04/19 5.10c tkz-tools-eu-math.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-intersections.tex
+2024/04/19 5.10c tkz-tools-eu-intersections.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-points-with.tex
+2024/04/19 5.10c tkz-obj-eu-points-with.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-points-spc.tex
+2024/04/19 5.10c tkz-obj-el-points.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-tools-eu-angles.tex
+2024/04/19 5.10c tkz-tools-eu-angles.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-circles.tex
+2024/04/19 5.10c tkz-obj-eu-circles.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-circles-by.tex
+2024/04/19 5.10c tkz-obj-eu-circles.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-points-rnd.tex
+2024/04/19 5.10c tkz-obj-eu-points-rnd.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-lines.tex
+2024/04/19 5.10c tkz-obj-eu-lines.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-polygons.tex
+2024/04/19 5.10c tkz-obj-eu-polygons.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-obj-eu-triangles.tex
+2024/04/19 5.10c tkz-obj-eu-triangles.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-lines.tex
+2024/04/19 5.10c tkz-obj-eu-draw-lines.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-circles.tex
+2024/04/19 5.10c tkz-obj-eu-draw-circles.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-ellipses.tex
+2024/04/19 5.10c tkz-obj-eu-draw-ellipses.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-polygons.tex
+2024/04/19 5.10c tkz-obj-eu-polygons.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-arcs.tex
+2024/04/19 5.10c tkz-tool-eu-arcs.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-angles.tex
+2024/04/19 5.10c tkz-tool-eu-angles.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-sectors.tex
+2024/04/19 5.10c tkz-obj-eu-sectors.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-compass.tex
+2024/04/19 5.10c tkz-obj-eu-compass.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-show.tex
+2024/04/19 5.10c tkz-obj-eu-show.tex
+) (/usr/share/texmf-dist/tex/latex/tkz-euclide/tkz-draw-eu-protractor.tex
+2024/04/19 5.10c tkz-obj-eu-protractor.tex
+))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+fit.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+petri.code.tex) (/usr/share/texmf-dist/tex/latex/tikz-network/tikz-network.sty
+(/usr/share/texmf-dist/tex/latex/etex-pkg/etex.sty
+
+Package etex Warning: Extended allocation already in use.
+(etex)                etex.sty code will not be used.
+(etex)                To force etex package to load, add
+(etex)                \RequirePackage{etex}
+(etex)                at the start of the document.
+
+) (/usr/share/texmf-dist/tex/latex/xifthen/xifthen.sty
+(/usr/share/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/share/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty))
+(/usr/share/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/share/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texmf-dist/tex/generic/xkeyval/xkvutils.tex)))
+(/usr/share/texmf-dist/tex/latex/datatool/datatool.sty
+(/usr/share/texmf-dist/tex/latex/xfor/xfor.sty)
+(/usr/share/texmf-dist/tex/latex/tracklang/tracklang.sty
+(/usr/share/texmf-dist/tex/generic/tracklang/tracklang.tex))
+(/usr/share/texmf-dist/tex/latex/datatool/datatool-base.sty
+(/usr/share/texmf-dist/tex/latex/datatool/datatool-l3fp.def)
+(/usr/share/texmf-dist/tex/latex/datatool/datatool-utf8.ldf)))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+3d.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+shapes.geometric.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geomet
+ric.code.tex))) (/usr/share/texmf-dist/tex/latex/graphics/dvipsnam.def)
+(/usr/share/texmf-dist/tex/latex/listings/listings.sty
+(/usr/share/texmf-dist/tex/latex/listings/lstpatch.sty)
+(/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty)
+(/usr/share/texmf-dist/tex/latex/listings/listings.cfg))
+(/usr/share/texmf-dist/tex/latex/cite/cite.sty)
+(/usr/share/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+(/usr/share/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/share/texmf-dist/tex/latex/environ/environ.sty))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '6.4.1'
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzfill-common.sty)
+(/usr/share/texmf-dist/tex/latex/tikzfill/tikzlibraryfill.image.code.tex))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '6.4.1'
+)) (/usr/share/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '6.4.1'
+(/usr/share/texmf-dist/tex/latex/pdfcol/pdfcol.sty))
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '6.4.1'
+) (/usr/share/texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '6.4.1'
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '6.4.1'
+(/usr/share/texmf-dist/tex/latex/tcolorbox/tcbprocessing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '6.4.1'
+))) (/usr/share/texmf-dist/tex/latex/titling/titling.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/share/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texmf-dist/tex/latex/minitoc/minitoc.sty
+(/usr/share/texmf-dist/tex/latex/minitoc/mtcmess.sty)
+(./Laporan-Tucil1-IF2211-2026.mtc0)
+(/usr/share/texmf-dist/tex/latex/minitoc/english.mld)
+(/usr/share/texmf-dist/tex/latex/minitoc/english.mld)))
+
+LaTeX Warning: Unused global option(s):
+    [13pt].
+
+(./Laporan-Tucil1-IF2211-2026.aux)
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(./Laporan-Tucil1-IF2211-2026.out) (./Laporan-Tucil1-IF2211-2026.out)
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+(Font)              using `OT1/cmr/bx/n' instead on input line 10.
+
+
+[1.1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/itb.png>]
+(./Laporan-Tucil1-IF2211-2026.toc
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd))
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.15 
+      [1.2] (./section/1-dahulu.tex
+[2.3 <./figures/input.png> <./figures/output.png>]
+Overfull \hbox (0.47244pt too wide) in paragraph at lines 125--138
+\OT1/cmr/m/n/10 Algoritma \OT1/cmr/m/it/10 Brute Force \OT1/cmr/m/n/10 adalah s
+e-buah pen-dekatan yang menye-le-saikan per-soalan se-cara lem-pang (\OT1/cmr/m
+/it/10 straight-
+
+[3.4{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty))
+(./section/2-desain.tex (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty)
+ (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty)
+[4.5]) (./section/3-implementasi.tex
+[5.6]
+[6.7]) (./section/4-bonus.tex
+[7.8]) (./section/5-testing.tex
+Overfull \hbox (20.96344pt too wide) in paragraph at lines 80--1
+[]\OT1/cmr/m/n/10 Algoritma ini mengam-bil tangka-pan dari \OT1/cmtt/m/n/10 boa
+rdGrid\OT1/cmr/m/n/10 , lalu meny-im-pan-nya dalam \OT1/cmr/m/it/10 folder \OT1
+/cmtt/m/n/10 src/main/output/\OT1/cmr/m/n/10 .
+
+[8.9]
+[9.10 <./figures/tc1.png> <./figures/tc2.png>]
+[10.11 <./figures/tc3.png> <./figures/tc4.png (PNG copy)>]
+[11.12 <./figures/tc5.png (PNG copy)> <./figures/tc6.png (PNG copy)> <./figures
+/tc7.png (PNG copy)>]) (./section/6-penutup.tex
+[12.13])
+
+Package minitoc(hints) Warning: W0024
+(minitoc(hints))                Some hints have been written 
+(minitoc(hints))                in the Laporan-Tucil1-IF2211-2026.log file.
+
+
+[13.14 <./figures/ttd endra.jpg>] (./Laporan-Tucil1-IF2211-2026.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `Laporan-Tucil1-IF2211-2026.out' has chang
+ed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{subsection.7.9} has been referenced but does not ex
+ist, replaced by a fixed one
+
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmitt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/shar
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1
+/public/cm-super/sfrm1000.pfb>
+Output written on Laporan-Tucil1-IF2211-2026.pdf (14 pages, 905880 bytes).
+Transcript written on Laporan-Tucil1-IF2211-2026.log.
+
+                ----------------------- END OUTPUT BUFFER -----------------------
+18 Feb 2026 03:38:56.878 INFO  - Task result: SUCCESS
+18 Feb 2026 03:38:56.879 INFO  - Total: 2.450 seconds

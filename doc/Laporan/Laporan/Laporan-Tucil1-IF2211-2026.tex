@@ -1,0 +1,24 @@
+% arara: pdflatex
+\documentclass[13pt,a4paper]{article}
+
+\usepackage{graphicx}
+\input{preamble.sty}
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+
+\newpage
+\input{section/1-dahulu.tex}
+\input{section/2-desain.tex}
+\input{section/3-implementasi.tex}
+\input{section/4-bonus.tex}
+\input{section/5-testing.tex}
+\input{section/6-penutup.tex}
+
+\end{document}

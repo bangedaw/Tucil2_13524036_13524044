@@ -1,0 +1,58 @@
+\section{Desain}\label{sec:Desain} % (fold)
+\subsection{Tech Stack}\label{sub:Tech Stack} % (fold)
+Aplikasi ini dirancang menggunakan bahasa Go untuk memudahkan
+pengimplementasian \textit{Concurrency} (Spesifikasi Bonus), serta
+memanfaatkan sintaks bahasa Go yang mudah dipahami dan mudah
+menemukan error. Secara garis besar, arsitektur aplikasi terdiri dari
+komponen-komponen berikut.
+\begin{enumerate}
+    \item Bahasa Pemrograman: Go 1.25.5
+    \item Lingkungan Pengembangan: Linux
+\end{enumerate}
+% subsection Tech Stack (end)
+
+\subsection{Struktur Program}\label{sub:Struktur Program} % (fold)
+Proyek disusun mengikuti standar Maven dan spesifikasi tugas:
+\begin{enumerate}
+    \item \texttt{src/}: Kode sumber program.
+    \item \texttt{test/}: Masukan yang digunakan untuk \textit{testing}
+    \item \texttt{bin/}: \textit{File executable} atau hasil kompilasi.
+    \item \texttt{doc/}: Spesifikasi dan laporan tugas kecil dalam PDF
+\end{enumerate}
+% subsection Struktur Program (end)
+Program utama dibagi menjadi dua komponen utama untuk memisahkan
+algoritma dengan GUI:
+\begin{itemize}
+    \item \texttt{main.go} berisi \textit{entry-point} program yang memanggil fungsi-fungsi lain yang digunakan.
+    \item \texttt{octree.go} berisi struktur data \textit{Octree} dan pembangunan \textit{bounding box}
+    \item \texttt{build.go} berisi pengimplementasian algoritma \textit{Divide and Conquer} untuk membangun struktur \textit{Octree}, serta penggunaan \textit{concurrency}. 
+    \item \texttt{parser.go} berisi logika \textit{parsing} untuk file .obj.
+    \item \texttt{viewer.go} berisi pengimplementasian fitur bonus untuk 3D \textit{object viewer}.
+    \item \texttt{optimizer.go} berisi logika \textit{optimizing} agar \textit{face} yang muncul tidak duplikat dan sisi kubus yang tertutup kubus lain tidak perlu dimasukkan.
+\end{itemize}
+
+\subsection{Cara Kompilasi dan Menjalankan Program}\label{sec:Cara
+Kompilasi dan Menjalankan Program} % (fold)
+Untuk mengompilasi seluruh kode sumber dan mengunduh dependensi
+Go, jalankan perintah berikut pada direktori \textit{src/}.
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small, breaklines=true]
+    go mod tidy
+\end{lstlisting}
+
+\noindent Untuk melakukan kompilasi (\textit{build}) program menjadi \textit{file executable}, gunakan perintah berikut.
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small, breaklines=true]
+    go build -o voxelizer src/*.go
+\end{lstlisting}
+
+\noindent Untuk menjalankan \textit{file executable}, gunakan perintah berikut.
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small, breaklines=true]
+    ./voxelizer
+\end{lstlisting}
+
+\noindent Atau jika ingin menjalankan program tanpa mengompilasi, gunakan perintah berikut.
+\begin{lstlisting}[language=bash, basicstyle=\ttfamily\small, breaklines=true]
+    go run src/*.go
+\end{lstlisting}
+
+% subsection Cara Kompilasi dan Menjalankan Program (end)
+% section Desain (end)

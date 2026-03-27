@@ -1,4 +1,5 @@
-\usepackage[a4paper, top=0in, bottom=0.2in, left=1in, right=1in, headheight=57pt, includeheadfoot]{geometry}
+\usepackage[a4paper, top=0in, bottom=0.2in, left=1in, right=1in,
+headheight=57pt, includeheadfoot]{geometry}
 \usepackage{enumitem}
 
 \usepackage{totpages}
@@ -82,8 +83,9 @@
 \captionsetup[table]{name=Tabel}
 \renewcommand{\refname}{Referensi}
 \renewcommand\today{$\number\day$\ %
-	\ifcase\month \or Januari\or Februari\or Maret\or April\or Mei%
-	\or Juni\or Juli\or Agustus\or September\or Oktober\or November\or Desember\fi\ $\number\year$}%
+    \ifcase\month \or Januari\or Februari\or Maret\or April\or Mei%
+    \or Juni\or Juli\or Agustus\or September\or Oktober\or November\or
+Desember\fi\ $\number\year$}%
 
 % bibliografi
 \usepackage{cite}
@@ -91,7 +93,8 @@
 \def\thebibliography#1{%
     \section*{\refname}%
     \addcontentsline{toc}{section}{\refname}%
-    \footnotesize\vskip 0.3\baselineskip plus 0.1\baselineskip minus 0.1\baselineskip%
+    \footnotesize\vskip 0.3\baselineskip plus 0.1\baselineskip minus
+    0.1\baselineskip%
     \list{\@biblabel{\@arabic\c@enumiv}}{%
         \settowidth\labelwidth{\@biblabel{#1}}%
         \leftmargin\labelwidth
@@ -99,7 +102,7 @@
         \itemsep 5pt\relax
         \usecounter{enumiv}%
         \let\p@enumiv\@empty
-        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+    \renewcommand\theenumiv{\@arabic\c@enumiv}}%
     \sloppy\clubpenalty4000\widowpenalty4000%
 }
 \def\endthebibliography{\endlist}
@@ -110,32 +113,32 @@
 \usepackage{tcolorbox}
 %chip
 \tcbset{
-  chip-docs-dark/.style={
-    enhanced,
-    boxrule=0pt, frame hidden,
-    borderline={0.45pt}{0pt}{white!25},  
-    colback=white!7,                      
-    coltext=black!40!ungu,                  
-    arc=6pt,                                
-    top=1pt, bottom=1pt, left=5pt, right=5pt,
-    boxsep=0pt,                            
-    on line, valign=center, tcbox raise base,
-    before upper={\vphantom{dg}},
-    nobeforeafter
-  },
-  chip-docs-light/.style={
-    enhanced,
-    boxrule=0pt, frame hidden,
-    borderline={0.45pt}{0pt}{black!15},
-    colback=black!7!white,                        
-    coltext=black!75!ungu,
-    arc=6pt,
-    top=1pt, bottom=1pt, left=5pt, right=5pt,
-    boxsep=0pt,
-    on line, valign=center, tcbox raise base,
-    before upper={\vphantom{dg}},
-    nobeforeafter
-  }
+    chip-docs-dark/.style={
+        enhanced,
+        boxrule=0pt, frame hidden,
+        borderline={0.45pt}{0pt}{white!25},
+        colback=white!7,
+        coltext=black!40!ungu,
+        arc=6pt,
+        top=1pt, bottom=1pt, left=5pt, right=5pt,
+        boxsep=0pt,
+        on line, valign=center, tcbox raise base,
+        before upper={\vphantom{dg}},
+        nobeforeafter
+    },
+    chip-docs-light/.style={
+        enhanced,
+        boxrule=0pt, frame hidden,
+        borderline={0.45pt}{0pt}{black!15},
+        colback=black!7!white,
+        coltext=black!75!ungu,
+        arc=6pt,
+        top=1pt, bottom=1pt, left=5pt, right=5pt,
+        boxsep=0pt,
+        on line, valign=center, tcbox raise base,
+        before upper={\vphantom{dg}},
+        nobeforeafter
+    }
 }
 \tcbuselibrary{skins, breakable, theorems, listings}
 
@@ -143,14 +146,14 @@
 
 % Jawab environment
 \makeatletter
-\tcbset{jawabbox/.style={check odd page, toggle left and right, 
-    skin=enhancedmiddle, breakable, parbox=false, boxrule=0mm,
-    colframe=black!85!lavender!60!white,
-    leftrule=8pt, rightrule=0mm, boxsep=0mm,
-    arc=0mm, outer arc=0mm, left=3mm, right=3mm, top=3mm, bottom=3mm,
-    colback=black!85!lavender!95!white, coltext=white,
-    before skip=8pt, after skip=8pt,
-    before={\par\vskip-2pt}, after={\par\smallbreak}}}
+\tcbset{jawabbox/.style={check odd page, toggle left and right,
+        skin=enhancedmiddle, breakable, parbox=false, boxrule=0mm,
+        colframe=black!85!lavender!60!white,
+        leftrule=8pt, rightrule=0mm, boxsep=0mm,
+        arc=0mm, outer arc=0mm, left=3mm, right=3mm, top=3mm, bottom=3mm,
+        colback=black!85!lavender!95!white, coltext=white,
+        before skip=8pt, after skip=8pt,
+before={\par\vskip-2pt}, after={\par\smallbreak}}}
 \newtcolorbox{JawabBox}{jawabbox}
 \makeatother
 
@@ -158,9 +161,11 @@
 
 % Proof environment
 \makeatletter
-\def\tcb@theo@widetitle#1#2#3{\hbox to \textwidth{\textsc{\large#1}\normalsize\space#3\hfil(#2)}}
+\def\tcb@theo@widetitle#1#2#3{\hbox to
+\textwidth{\textsc{\large#1}\normalsize\space#3\hfil(#2)}}
 \tcbset{
-    theorem style/theorem wide name and number/.code={\let\tcb@theo@title=\tcb@theo@widetitle},
+    theorem style/theorem wide name and
+    number/.code={\let\tcb@theo@title=\tcb@theo@widetitle},
     proofbox/.style={skin=enhancedmiddle, breakable, parbox=false, boxrule=0mm,
         check odd page, toggle left and right,
         colframe=black!85!lavender!60!white,
@@ -168,7 +173,7 @@
         arc=0mm, outer arc=0mm, left=3mm, right=3mm,
         colback=black!85!lavender!95!white, coltext=white,
         before skip=8pt, after skip=8pt,
-        before={\par\vskip-2pt}, after={\par\smallbreak}}}
+before={\par\vskip-2pt}, after={\par\smallbreak}}}
 \newtcolorbox{ProofBox}{proofbox}
 \makeatother
 
@@ -179,19 +184,19 @@
 
 % Theorem environments
 \newtcbtheorem[use counter=hitung, number within=section]{thm}{Teorema}
-  {theorem style=theorem wide name and number, breakable, enhanced,
-   boxrule=0pt, top=0.2cm, colframe=black!85!lavender!50!merah,
-   colback=black!85!lavender!80!merah, coltitle=white, coltext=white!80!merah,
-   fonttitle=\bfseries,fontupper=\normalsize}{thm}
+{theorem style=theorem wide name and number, breakable, enhanced,
+    boxrule=0pt, top=0.2cm, colframe=black!85!lavender!50!merah,
+    colback=black!85!lavender!80!merah, coltitle=white, coltext=white!80!merah,
+fonttitle=\bfseries,fontupper=\normalsize}{thm}
 
 \newtcbtheorem[use counter=hitung, number within=section]{cmt}{Komentar}
-  {theorem style=theorem wide name and number, breakable, enhanced,
-   boxrule=0pt, top=0.2cm, colframe=black!85!lavender!50!hijau,
-   colback=black!85!lavender!80!hijau, coltitle=white, coltext=white!80!hijau,
-   fonttitle=\bfseries,fontupper=\normalsize}{cmt}
+{theorem style=theorem wide name and number, breakable, enhanced,
+    boxrule=0pt, top=0.2cm, colframe=black!85!lavender!50!hijau,
+    colback=black!85!lavender!80!hijau, coltitle=white, coltext=white!80!hijau,
+fonttitle=\bfseries,fontupper=\normalsize}{cmt}
 
 % judul
-\usepackage{titling} 
+\usepackage{titling}
 \pretitle{\centering\LARGE\scshape}
 \posttitle{\vspace{0.5em}\par\vspace{1cm}\includegraphics[width=0.6\textwidth]{figures/itb.png}\par\vspace{1.5cm}}
 \preauthor{\centering\large\scshape}
@@ -199,25 +204,29 @@
 \predate{\centering}
 \postdate{\par}
 \title{%
-  \vspace{-2cm}
-  \textbf{\LARGE Laporan Tugas Kecil 1} \\[0.25em]
-  \Large IF2211 Strategi Algoritma \\[0.25em]
-  \large Penyelesaian Permainan Queens Linkedin \\[0.25em]
-  \normalsize Semester II Tahun 2025/2026 \\[2em]
+    \vspace{-2cm}
+    \textbf{\LARGE Laporan Tugas Kecil 2} \\[0.25em]
+    \Large IF2211 Strategi Algoritma \\[0.25em]
+    \large \textit{Voxelization} Objek 3D Menggunakan Octree \\[0.25em]
+    \normalsize Semester II Tahun 2025/2026 \\[5em]
 }
 
 \author{%
-    Narendra Dharma Wistara M. \\[.25em]
-    13524044 \\[2.5em]
-  Program Studi Teknik Informatika \\[.25em]
-  Sekolah Teknik Elektro dan Informatika \\[.25em] 
-  Institut Teknologi Bandung\\[.25em]
+    \begin{tabular}[c]{l l}
+        Edward David Rumahorbo     & 13524036 \\
+        Narendra Dharma Wistara M. & 13524044 \\
+    \end{tabular}
+    \vspace{2.5em} \\ % Menambah jarak ke baris berikutnya
+    Program Studi Teknik Informatika \\[.25em]
+    Sekolah Teknik Elektro dan Informatika \\[.25em] 
+    Institut Teknologi Bandung\\[.25em]
 }
 \date{}
 
 % catatan kaki
 \makeatletter
-\renewcommand\@makefntext[1]{\parindent 1em\noindent\color{black!80}\hb@xt@1.8em{\hss\@makefnmark}#1}
+\renewcommand\@makefntext[1]{\parindent
+1em\noindent\color{black!80}\hb@xt@1.8em{\hss\@makefnmark}#1}
 \makeatother
 
 % header & footer
@@ -233,10 +242,9 @@
 }
 \usepackage{minitoc}
 \newcommand{\richlink}[2]{%
-  \href{#1}{\tcbox[chip-docs-light]{#2}}%
+    \href{#1}{\tcbox[chip-docs-light]{#2}}%
 }
 
 \newcommand{\richref}[2]{%
-  \hyperref[#1]{\tcbox[chip-docs-light]{#2}}%
+    \hyperref[#1]{\tcbox[chip-docs-light]{#2}}%
 }
-

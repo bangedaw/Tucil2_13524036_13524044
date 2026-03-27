@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2026.2.11)  18 FEB 2026 03:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2026.2.11)  28 MAR 2026 02:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1234,8 +1234,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip69
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 233.
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 233.
+Package hyperref Info: Option `colorlinks' set `true' on input line 242.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 242.
 
 
 (/usr/share/texmf-dist/tex/latex/minitoc/minitoc.sty
@@ -1394,27 +1394,31 @@ Package minitoc(hints) Info: I0049
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 (Font)              using `OT1/cmr/bx/n' instead on input line 10.
 
-<figures/itb.png, id=135, 284.56313pt x 284.56313pt>
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/scit' undefined
+(Font)              using `OT1/cmr/m/it' instead on input line 10.
+
+<figures/itb.png, id=147, 284.56313pt x 284.56313pt>
 File: figures/itb.png Graphic file (type png)
 <use figures/itb.png>
 Package pdftex.def Info: figures/itb.png  used on input line 10.
 (pdftex.def)             Requested size: 271.7835pt x 271.80974pt.
-
-
-[1.1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/itb.png>]
-(./Laporan-Tucil1-IF2211-2026.toc
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 10.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
+
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+)
+
+[1.1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/itb.png>]
+(./Laporan-Tucil1-IF2211-2026.toc)
 \tf@toc=\write6
 \openout6 = `Laporan-Tucil1-IF2211-2026.toc'.
 
@@ -1427,47 +1431,53 @@ been already used, duplicate ignored
                    \relax 
 l.15 
       [1.2] (./section/1-dahulu.tex
-<figures/input.png, id=216, 415.5525pt x 410.53375pt>
+<figures/voxel.jpg, id=235, 432.04892pt x 139.0412pt>
+File: figures/voxel.jpg Graphic file (type jpg)
+<use figures/voxel.jpg>
+Package pdftex.def Info: figures/voxel.jpg  used on input line 4.
+(pdftex.def)             Requested size: 226.48395pt x 72.88527pt.
+<figures/octree.png, id=238, 853.1875pt x 359.3425pt>
+File: figures/octree.png Graphic file (type png)
+<use figures/octree.png>
+Package pdftex.def Info: figures/octree.png  used on input line 21.
+(pdftex.def)             Requested size: 226.48395pt x 95.3898pt.
+<figures/input.png, id=240, 683.55376pt x 452.69125pt>
 File: figures/input.png Graphic file (type png)
 <use figures/input.png>
-Package pdftex.def Info: figures/input.png  used on input line 18.
-(pdftex.def)             Requested size: 226.48395pt x 223.74585pt.
-<figures/output.png, id=217, 415.5525pt x 410.53375pt>
+Package pdftex.def Info: figures/input.png  used on input line 40.
+(pdftex.def)             Requested size: 226.48395pt x 149.98952pt.
+<figures/output.png, id=241, 684.5575pt x 454.69875pt>
 File: figures/output.png Graphic file (type png)
 <use figures/output.png>
-Package pdftex.def Info: figures/output.png  used on input line 28.
-(pdftex.def)             Requested size: 226.48395pt x 223.74585pt.
+Package pdftex.def Info: figures/output.png  used on input line 47.
+(pdftex.def)             Requested size: 226.48395pt x 150.43265pt.
 
 
-[2.3 <./figures/input.png> <./figures/output.png>]
-Overfull \hbox (0.47244pt too wide) in paragraph at lines 125--138
-\OT1/cmr/m/n/10 Algoritma \OT1/cmr/m/it/10 Brute Force \OT1/cmr/m/n/10 adalah s
-e-buah pen-dekatan yang menye-le-saikan per-soalan se-cara lem-pang (\OT1/cmr/m
-/it/10 straight-
- []
+[2.3 <./figures/voxel.jpg> <./figures/octree.png> <./figures/input.png (PNG cop
+y)>]
 
+[3.4{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./figure
+s/output.png (PNG copy)>]
 
-
-[3.4{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+[4.5] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
-)
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 150.
-)
+))
 (./section/2-desain.tex (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 ) (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
 
-[4.5]) (./section/3-implementasi.tex
+[5.6]) (./section/3-implementasi.tex
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 14.
 
-[5.6]
 
-[6.7]) (./section/4-bonus.tex
+[6.7]
 
-[7.8]) (./section/5-testing.tex
+[7.8]) (./section/4-bonus.tex
+
+[8.9]) (./section/5-testing.tex
 Overfull \hbox (20.96344pt too wide) in paragraph at lines 80--1
 []\OT1/cmr/m/n/10 Algoritma ini mengam-bil tangka-pan dari \OT1/cmtt/m/n/10 boa
 rdGrid\OT1/cmr/m/n/10 , lalu meny-im-pan-nya dalam \OT1/cmr/m/it/10 folder \OT1
@@ -1476,58 +1486,64 @@ rdGrid\OT1/cmr/m/n/10 , lalu meny-im-pan-nya dalam \OT1/cmr/m/it/10 folder \OT1
 
 
 
-[8.9]
-<figures/tc1.png, id=409, 1862.96pt x 276.03125pt>
-File: figures/tc1.png Graphic file (type png)
-<use figures/tc1.png>
-Package pdftex.def Info: figures/tc1.png  used on input line 37.
-(pdftex.def)             Requested size: 452.9679pt x 67.11227pt.
-<figures/tc2.png, id=410, 904.37875pt x 480.79625pt>
-File: figures/tc2.png Graphic file (type png)
-<use figures/tc2.png>
-Package pdftex.def Info: figures/tc2.png  used on input line 66.
-(pdftex.def)             Requested size: 317.07614pt x 168.56732pt.
+[9.10]
+File: figures/itb.png Graphic file (type png)
+<use figures/itb.png>
+Package pdftex.def Info: figures/itb.png  used on input line 37.
+(pdftex.def)             Requested size: 452.9679pt x 453.01334pt.
 
 
-[9.10 <./figures/tc1.png> <./figures/tc2.png>]
-<figures/tc3.png, id=419, 904.37875pt x 531.9875pt>
-File: figures/tc3.png Graphic file (type png)
-<use figures/tc3.png>
-Package pdftex.def Info: figures/tc3.png  used on input line 97.
-(pdftex.def)             Requested size: 317.07614pt x 186.515pt.
-<figures/tc4.png, id=420, 313.17pt x 148.555pt>
-File: figures/tc4.png Graphic file (type png)
-<use figures/tc4.png>
-Package pdftex.def Info: figures/tc4.png  used on input line 122.
-(pdftex.def)             Requested size: 226.48395pt x 107.43779pt.
+[10.11]
+File: figures/itb.png Graphic file (type png)
+<use figures/itb.png>
+Package pdftex.def Info: figures/itb.png  used on input line 66.
+(pdftex.def)             Requested size: 317.07614pt x 317.11063pt.
 
 
-[10.11 <./figures/tc3.png> <./figures/tc4.png (PNG copy)>]
-<figures/tc5.png, id=428, 476.78125pt x 99.37125pt>
-File: figures/tc5.png Graphic file (type png)
-<use figures/tc5.png>
-Package pdftex.def Info: figures/tc5.png  used on input line 144.
-(pdftex.def)             Requested size: 226.48395pt x 47.20486pt.
-<figures/tc6.png, id=429, 476.78125pt x 99.37125pt>
-File: figures/tc6.png Graphic file (type png)
-<use figures/tc6.png>
-Package pdftex.def Info: figures/tc6.png  used on input line 168.
-(pdftex.def)             Requested size: 226.48395pt x 47.20486pt.
-<figures/tc7.png, id=430, 471.7625pt x 107.40125pt>
-File: figures/tc7.png Graphic file (type png)
-<use figures/tc7.png>
-Package pdftex.def Info: figures/tc7.png  used on input line 189.
-(pdftex.def)             Requested size: 226.48395pt x 51.56183pt.
+[11.12]
+File: figures/itb.png Graphic file (type png)
+<use figures/itb.png>
+Package pdftex.def Info: figures/itb.png  used on input line 97.
+(pdftex.def)             Requested size: 317.07614pt x 317.11063pt.
+File: figures/itb.png Graphic file (type png)
+<use figures/itb.png>
+Package pdftex.def Info: figures/itb.png  used on input line 122.
+(pdftex.def)             Requested size: 226.48395pt x 226.4958pt.
+File: figures/itb.png Graphic file (type png)
+<use figures/itb.png>
+Package pdftex.def Info: figures/itb.png  used on input line 144.
+(pdftex.def)             Requested size: 226.48395pt x 226.4958pt.
 
-
-[11.12 <./figures/tc5.png (PNG copy)> <./figures/tc6.png (PNG copy)> <./figures
-/tc7.png (PNG copy)>]) (./section/6-penutup.tex
 
 [12.13]
-<figures/ttd endra.jpg, id=447, 248.93pt x 325.215pt>
+
+[13.14]
+File: figures/itb.png Graphic file (type png)
+<use figures/itb.png>
+Package pdftex.def Info: figures/itb.png  used on input line 168.
+(pdftex.def)             Requested size: 226.48395pt x 226.4958pt.
+File: figures/itb.png Graphic file (type png)
+<use figures/itb.png>
+Package pdftex.def Info: figures/itb.png  used on input line 189.
+(pdftex.def)             Requested size: 226.48395pt x 226.4958pt.
+
+
+[14.15]) (./section/6-penutup.tex
+Underfull \hbox (badness 4543) in paragraph at lines 18--19
+[]|\OT1/cmr/m/n/10 Program da-pat mener-ima ma-sukan .obj, dan
+ []
+
+
+
+[15.16]
+<figures/ttd endra.jpg, id=472, 248.93pt x 325.215pt>
 File: figures/ttd endra.jpg Graphic file (type jpg)
 <use figures/ttd endra.jpg>
 Package pdftex.def Info: figures/ttd endra.jpg  used on input line 50.
+(pdftex.def)             Requested size: 58.88803pt x 76.93169pt.
+File: figures/ttd endra.jpg Graphic file (type jpg)
+<use figures/ttd endra.jpg>
+Package pdftex.def Info: figures/ttd endra.jpg  used on input line 60.
 (pdftex.def)             Requested size: 58.88803pt x 76.93169pt.
 )
 Package minitoc Info: I0009
@@ -1548,7 +1564,7 @@ Package minitoc(hints) Warning: W0024
 
 
 
-[13.14 <./figures/ttd endra.jpg>] (./Laporan-Tucil1-IF2211-2026.aux)
+[16.17 <./figures/ttd endra.jpg>] (./Laporan-Tucil1-IF2211-2026.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
@@ -1557,48 +1573,36 @@ L3 programming layer <2020/03/25>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `Laporan-Tucil1-IF2211-2026.out' has chang
-ed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Laporan-Tucil1-IF2211-2026.out':
-(rerunfilecheck)             Before: BD1EB76B6D6575649DCF2F724ADFE735;4870
-(rerunfilecheck)             After:  D5259473250F56C3F803E822B8261B86;4728.
+Package rerunfilecheck Info: File `Laporan-Tucil1-IF2211-2026.out' has not chan
+ged.
+(rerunfilecheck)             Checksum: 4E01F4F3B5A90E357D3EED47058ACB32;5310.
  ) 
 Here is how much of TeX's memory you used:
- 62747 strings out of 475171
- 1471551 string characters out of 5767095
- 2556350 words of memory out of 5000000
- 84675 multiletter control sequences out of 15000+600000
- 565706 words of font info for 62 fonts, out of 8000000 for 9000
+ 62766 strings out of 475171
+ 1471714 string characters out of 5767095
+ 2540282 words of memory out of 5000000
+ 84679 multiletter control sequences out of 15000+600000
+ 570400 words of font info for 80 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,12n,96p,1314b,2066s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{subsection.7.9} has been referenced but does not ex
-ist, replaced by a fixed one
-
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmitt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.
-pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1
-/public/cm-super/sfrm1000.pfb>
-Output written on Laporan-Tucil1-IF2211-2026.pdf (14 pages, 905880 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmitt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti1
+0.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
+uper/sfrm1000.pfb>
+Output written on Laporan-Tucil1-IF2211-2026.pdf (17 pages, 918774 bytes).
 PDF statistics:
- 562 PDF objects out of 1000 (max. 8388607)
- 496 compressed objects within 5 object streams
- 207 named destinations out of 1000 (max. 500000)
- 324 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 596 PDF objects out of 1000 (max. 8388607)
+ 530 compressed objects within 6 object streams
+ 213 named destinations out of 1000 (max. 500000)
+ 323 words of extra memory for PDF output out of 10000 (max. 10000000)
 

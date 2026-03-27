@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"html/template"
 	"io"
@@ -9,7 +8,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 	"sync"
 	"time"
 )
@@ -19,7 +17,6 @@ type Model struct {
 	Faces    [][]int
 }
 
-// Struktur baru untuk menggabungkan data visualisasi dan teks mentah file .obj
 type VoxelizeResponse struct {
 	Model   Model  `json:"model"`
 	ObjData string `json:"objData"`
@@ -27,59 +24,7 @@ type VoxelizeResponse struct {
 
 var currentModel Model
 
-func ObjtoModel(filename string) error {
-	file, err := os.Open(filename)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	var vertices []Vector3
-	var faces [][]int
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		line := strings.TrimSpace(scanner.Text())
-		if len(line) == 0 || line[0] == '#' {
-			continue
-		}
-
-		parts := strings.Fields(line)
-		if len(parts) == 0 {
-			continue
-		}
-
-		switch parts[0] {
-		case "v":
-			if len(parts) >= 4 {
-				x, _ := strconv.ParseFloat(parts[1], 64)
-				y, _ := strconv.ParseFloat(parts[2], 64)
-				z, _ := strconv.ParseFloat(parts[3], 64)
-				vertices = append(vertices, Vector3{X: x, Y: y, Z: z})
-			}
-		case "f":
-			var face []int
-			for _, p := range parts[1:] {
-				vStr := strings.Split(p, "/")[0]
-				idx, err := strconv.Atoi(vStr)
-				if err == nil {
-					if idx > 0 {
-						face = append(face, idx-1)
-					} else {
-						face = append(face, len(vertices)+idx)
-					}
-				}
-			}
-			if len(face) >= 3 {
-				faces = append(faces, face)
-			}
-		}
-	}
-
-	currentModel = normalizeModel(Model{Vertices: vertices, Faces: faces})
-	return scanner.Err()
-}
-
+// normalizeModel menempatkan model di pusat origin (0,0,0) dan menyesuaikan ukurannya.
 func normalizeModel(m Model) Model {
 	if len(m.Vertices) == 0 {
 		return m
@@ -163,6 +108,58 @@ func handleVoxelize(w http.ResponseWriter, r *http.Request) {
 	var solidVoxels []BoundingBox
 	CollectVoxels(rootNode, &solidVoxels)
 
+	// --- AWAL LOGIKA OPTIMASI PERMUKAAN (HIDDEN FACE CULLING) ---
+	gridDim := 1 << maxDepth
+	rootSize := rootBoundary.Max.X - rootBoundary.Min.X
+	voxelSize := rootSize / float64(gridDim)
+
+	om := NewOptimizationMap(solidVoxels, rootBoundary.Min, voxelSize)
+
+	optimizedModel := Model{Vertices: []Vector3{}, Faces: [][]int{}}
+	vertexCount := 0
+
+	for key := range om.VoxelGrid {
+		voxelMinX := float64(key.X)*voxelSize + rootBoundary.Min.X
+		voxelMinY := float64(key.Y)*voxelSize + rootBoundary.Min.Y
+		voxelMinZ := float64(key.Z)*voxelSize + rootBoundary.Min.Z
+
+		vMin := Vector3{X: voxelMinX, Y: voxelMinY, Z: voxelMinZ}
+		vMax := Vector3{X: voxelMinX + voxelSize, Y: voxelMinY + voxelSize, Z: voxelMinZ + voxelSize}
+
+		cubeVertices := []Vector3{
+			{X: vMin.X, Y: vMin.Y, Z: vMin.Z}, {X: vMax.X, Y: vMin.Y, Z: vMin.Z}, {X: vMax.X, Y: vMin.Y, Z: vMax.Z}, {X: vMin.X, Y: vMin.Y, Z: vMax.Z},
+			{X: vMin.X, Y: vMax.Y, Z: vMin.Z}, {X: vMax.X, Y: vMax.Y, Z: vMin.Z}, {X: vMax.X, Y: vMax.Y, Z: vMax.Z}, {X: vMin.X, Y: vMax.Y, Z: vMax.Z},
+		}
+
+		offset := vertexCount
+		optimizedModel.Vertices = append(optimizedModel.Vertices, cubeVertices...)
+
+		// Cek sisi yang bersentuhan, buang sisi dalam
+		if !om.IsInternalFace(key.X, key.Y, key.Z, "Bawah") {
+			optimizedModel.Faces = append(optimizedModel.Faces, []int{offset, offset + 1, offset + 2, offset + 3})
+		}
+		if !om.IsInternalFace(key.X, key.Y, key.Z, "Atas") {
+			optimizedModel.Faces = append(optimizedModel.Faces, []int{offset + 4, offset + 5, offset + 6, offset + 7})
+		}
+		if !om.IsInternalFace(key.X, key.Y, key.Z, "Belakang") {
+			optimizedModel.Faces = append(optimizedModel.Faces, []int{offset, offset + 1, offset + 5, offset + 4})
+		}
+		if !om.IsInternalFace(key.X, key.Y, key.Z, "Depan") {
+			optimizedModel.Faces = append(optimizedModel.Faces, []int{offset + 2, offset + 3, offset + 7, offset + 6})
+		}
+		if !om.IsInternalFace(key.X, key.Y, key.Z, "Kiri") {
+			optimizedModel.Faces = append(optimizedModel.Faces, []int{offset + 3, offset, offset + 4, offset + 7})
+		}
+		if !om.IsInternalFace(key.X, key.Y, key.Z, "Kanan") {
+			optimizedModel.Faces = append(optimizedModel.Faces, []int{offset + 1, offset + 2, offset + 6, offset + 5})
+		}
+		vertexCount += 8
+	}
+
+	currentModel = normalizeModel(optimizedModel)
+	// --- AKHIR LOGIKA OPTIMASI ---
+
+	// Export voxel utuh ke file .obj untuk fitur Download
 	numVertices, numFaces, err := ExportToObj(solidVoxels, tempOutput)
 	if err != nil {
 		http.Error(w, "Gagal export voxel", http.StatusInternalServerError)
@@ -170,17 +167,8 @@ func handleVoxelize(w http.ResponseWriter, r *http.Request) {
 	}
 
 	executionTime := time.Since(startTime)
-
-	// Laporan terminal CLI (Wajib)
 	PrintReport(stats, len(solidVoxels), numVertices, numFaces, maxDepth, executionTime, fileHeader.Filename+" (Voxelized)")
 
-	err = ObjtoModel(tempOutput)
-	if err != nil {
-		http.Error(w, "Gagal memuat model baru", http.StatusInternalServerError)
-		return
-	}
-
-	// Membaca file hasil voxelization menjadi string mentah untuk dikirim ke fitur Download UI
 	objBytes, err := os.ReadFile(tempOutput)
 	var rawObjData string
 	if err == nil {
@@ -190,7 +178,6 @@ func handleVoxelize(w http.ResponseWriter, r *http.Request) {
 	os.Remove(tempInput)
 	os.Remove(tempOutput)
 
-	// Mengirim Model 3D dan String File .obj sekaligus
 	response := VoxelizeResponse{
 		Model:   currentModel,
 		ObjData: rawObjData,
@@ -210,7 +197,7 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Go 3D Object Viewer - Optimized</title>
+    <title>Go 3D Object Viewer - Solid Voxel</title>
     <style>
         body { margin: 0; overflow: hidden; background-color: #f4f4f9; font-family: sans-serif; }
         canvas { display: block; cursor: grab; }
@@ -219,8 +206,6 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
         input[type="file"], input[type="number"], button { width: 100%; margin-top: 5px; box-sizing: border-box; }
         button { padding: 8px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 15px; font-weight: bold; transition: background 0.2s; }
         button:hover { background: #34495e; }
-        
-        /* Gaya khusus untuk tombol download */
         .btn-download { background: #27ae60; margin-top: 10px; display: none; }
         .btn-download:hover { background: #219653; }
     </style>
@@ -252,8 +237,8 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
     <script>
         let model = {{.ModelData}};
-        let currentObjData = ""; // Menyimpan teks raw file .obj
-        let currentFileName = "voxelized.obj"; // Nama default untuk download
+        let currentObjData = ""; 
+        let currentFileName = "voxelized.obj"; 
 
         const canvas = document.getElementById('viewer');
         const ctx = canvas.getContext('2d');
@@ -305,31 +290,58 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
                 return;
             }
 
-            ctx.strokeStyle = '#2c3e50';
-            ctx.lineWidth = 1.0;
+            // Garis pinggir yang tipis dan agak transparan
+            ctx.strokeStyle = 'rgba(44, 62, 80, 0.7)';
+            ctx.lineWidth = 0.3;
 
             const sinX = Math.sin(rx); const cosX = Math.cos(rx);
             const sinY = Math.sin(ry); const cosY = Math.cos(ry);
             const cx = width / 2; const cy = height / 2;
 
+            // 1. Proyeksi 3D ke 2D dan simpan kedalaman Z (Z-Depth)
             const projected = model.Vertices.map(v => {
                 const x1 = v.X * cosY - v.Z * sinY;
                 const z1 = v.X * sinY + v.Z * cosY;
                 const y1 = v.Y;
                 const y2 = y1 * cosX - z1 * sinX;
-                return { x: x1 * scale + cx, y: -y2 * scale + cy };
+                const z2 = z1 * cosX + y1 * sinX; // Kedalaman Z dihitung di sini
+                return { x: x1 * scale + cx, y: -y2 * scale + cy, z: z2 };
             });
 
-            ctx.beginPath();
+            // 2. Kumpulkan semua sisi (faces) beserta rata-rata kedalaman Z-nya
+            const facesToDraw = [];
             model.Faces.forEach(face => {
                 if (face.length < 3) return;
+                let zSum = 0;
+                for (let i = 0; i < face.length; i++) {
+                    zSum += projected[face[i]].z;
+                }
+                facesToDraw.push({
+                    indices: face,
+                    zDepth: zSum / face.length
+                });
+            });
+
+            // 3. Painter's Algorithm: Urutkan dari sisi paling belakang ke paling depan
+            facesToDraw.sort((a, b) => a.zDepth - b.zDepth);
+
+            // 4. Gambar dan warnai secara berurutan
+            facesToDraw.forEach(faceObj => {
+                const face = faceObj.indices;
+                ctx.beginPath();
                 ctx.moveTo(projected[face[0]].x, projected[face[0]].y);
                 for (let i = 1; i < face.length; i++) {
                     ctx.lineTo(projected[face[i]].x, projected[face[i]].y);
                 }
                 ctx.closePath();
+                
+                // Isi persegi dengan warna solid untuk MENUTUPI garis yang ada di belakangnya
+                ctx.fillStyle = '#ecf0f1'; // Warna abu-abu cerah ala voxel
+                ctx.fill();
+                
+                // Gambar garis tepi persegi
+                ctx.stroke();
             });
-            ctx.stroke();
         }
 
         document.getElementById('uploadForm').addEventListener('submit', function(e) {
@@ -342,7 +354,6 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
             
             if (fileInput.files.length === 0) return;
             
-            // Simpan nama file orisinil untuk nama file download
             let originalName = fileInput.files[0].name;
             currentFileName = originalName.replace('.obj', '') + '_voxelized.obj';
             
@@ -351,7 +362,7 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
             formData.append('depth', depthInput.value);
             
             loadingDiv.style.display = 'block';
-            downloadBtn.style.display = 'none'; // Sembunyikan tombol saat loading
+            downloadBtn.style.display = 'none'; 
             
             fetch('/voxelize', {
                 method: 'POST',
@@ -362,7 +373,6 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
                 return response.json();
             })
             .then(data => {
-                // Sekarang 'data' mengandung 'model' dan 'objData'
                 model = data.model; 
                 currentObjData = data.objData;
                 
@@ -371,7 +381,7 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
                 draw(); 
                 
                 loadingDiv.style.display = 'none';
-                downloadBtn.style.display = 'block'; // Tampilkan tombol download
+                downloadBtn.style.display = 'block'; 
             })
             .catch(err => {
                 alert(err.message);
@@ -379,22 +389,18 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
             });
         });
 
-        // Event Listener untuk Tombol Download
         document.getElementById('downloadBtn').addEventListener('click', function() {
             if (!currentObjData) return;
             
-            // Membuat Blob (Binary Large Object) yang berisi teks file .obj
             const blob = new Blob([currentObjData], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             
-            // Membuat elemen <a> maya untuk memicu unduhan di browser
             const a = document.createElement('a');
             a.href = url;
-            a.download = currentFileName; // Misalnya: cow_voxelized.obj
+            a.download = currentFileName;
             document.body.appendChild(a);
             a.click();
             
-            // Bersihkan sisa elemen
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         });

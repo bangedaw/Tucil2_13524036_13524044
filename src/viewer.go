@@ -4,23 +4,29 @@ import (
 	"bufio"
 	"encoding/json"
 	"html/template"
+	"io"
 	"math"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
+	"sync"
+	"time"
 )
 
-// Model menyimpan data geometri dari berkas .obj.
 type Model struct {
 	Vertices []Vector3
 	Faces    [][]int
 }
 
+// Struktur baru untuk menggabungkan data visualisasi dan teks mentah file .obj
+type VoxelizeResponse struct {
+	Model   Model  `json:"model"`
+	ObjData string `json:"objData"`
+}
+
 var currentModel Model
 
-// ObjtoModel membaca dan memuat berkas .obj ke dalam struktur Model.
-// (Fungsi ini tetap sama persis seperti buatan temanmu)
 func ObjtoModel(filename string) error {
 	file, err := os.Open(filename)
 	if err != nil {
@@ -74,8 +80,6 @@ func ObjtoModel(filename string) error {
 	return scanner.Err()
 }
 
-// normalizeModel menempatkan model di pusat origin (0,0,0) dan menyesuaikan ukurannya.
-// (Fungsi ini juga tetap sama)
 func normalizeModel(m Model) Model {
 	if len(m.Vertices) == 0 {
 		return m
@@ -104,16 +108,104 @@ func normalizeModel(m Model) Model {
 	return m
 }
 
-// handleIndex menyajikan halaman web tunggal sekaligus menyuntikkan data JSON
-func handleIndex(w http.ResponseWriter, r *http.Request) {
-	// Konversi struktur data Model Go kita menjadi format JSON
-	modelJSON, err := json.Marshal(currentModel)
-	if err != nil {
-		http.Error(w, "Gagal memproses model", http.StatusInternalServerError)
+func handleVoxelize(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Metode tidak diizinkan", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// HTML & JavaScript Terintegrasi
+	err := r.ParseMultipartForm(50 << 20)
+	if err != nil {
+		http.Error(w, "Gagal memproses form", http.StatusBadRequest)
+		return
+	}
+
+	file, fileHeader, err := r.FormFile("file")
+	if err != nil {
+		http.Error(w, "Gagal mendapatkan file upload", http.StatusBadRequest)
+		return
+	}
+	defer file.Close()
+
+	depthStr := r.FormValue("depth")
+	maxDepth, err := strconv.Atoi(depthStr)
+	if err != nil || maxDepth <= 0 {
+		maxDepth = 5
+	}
+
+	tempInput := "temp_input.obj"
+	tempOutput := "temp_output.obj"
+
+	outFile, err := os.Create(tempInput)
+	if err != nil {
+		http.Error(w, "Gagal menyimpan file temporary", http.StatusInternalServerError)
+		return
+	}
+	io.Copy(outFile, file)
+	outFile.Close()
+
+	startTime := time.Now()
+
+	vertices, faces, rootBoundary, err := ParseOBJ(tempInput)
+	if err != nil {
+		http.Error(w, "Gagal parsing OBJ", http.StatusInternalServerError)
+		return
+	}
+
+	rootNode := NewOctreeNode(rootBoundary)
+	stats := NewOctreeStats(maxDepth)
+
+	var wg sync.WaitGroup
+	wg.Add(1)
+	BuildOctreeConcurrent(rootNode, vertices, faces, 0, maxDepth, stats, &wg)
+	wg.Wait()
+
+	var solidVoxels []BoundingBox
+	CollectVoxels(rootNode, &solidVoxels)
+
+	numVertices, numFaces, err := ExportToObj(solidVoxels, tempOutput)
+	if err != nil {
+		http.Error(w, "Gagal export voxel", http.StatusInternalServerError)
+		return
+	}
+
+	executionTime := time.Since(startTime)
+
+	// Laporan terminal CLI (Wajib)
+	PrintReport(stats, len(solidVoxels), numVertices, numFaces, maxDepth, executionTime, fileHeader.Filename+" (Voxelized)")
+
+	err = ObjtoModel(tempOutput)
+	if err != nil {
+		http.Error(w, "Gagal memuat model baru", http.StatusInternalServerError)
+		return
+	}
+
+	// Membaca file hasil voxelization menjadi string mentah untuk dikirim ke fitur Download UI
+	objBytes, err := os.ReadFile(tempOutput)
+	var rawObjData string
+	if err == nil {
+		rawObjData = string(objBytes)
+	}
+
+	os.Remove(tempInput)
+	os.Remove(tempOutput)
+
+	// Mengirim Model 3D dan String File .obj sekaligus
+	response := VoxelizeResponse{
+		Model:   currentModel,
+		ObjData: rawObjData,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+func handleIndex(w http.ResponseWriter, r *http.Request) {
+	modelJSON, err := json.Marshal(currentModel)
+	if err != nil {
+		modelJSON = []byte("{}")
+	}
+
 	html := `<!DOCTYPE html>
 <html lang="id">
 <head>
@@ -123,20 +215,45 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
         body { margin: 0; overflow: hidden; background-color: #f4f4f9; font-family: sans-serif; }
         canvas { display: block; cursor: grab; }
         canvas:active { cursor: grabbing; }
-        .controls { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .controls { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 250px; }
+        input[type="file"], input[type="number"], button { width: 100%; margin-top: 5px; box-sizing: border-box; }
+        button { padding: 8px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 15px; font-weight: bold; transition: background 0.2s; }
+        button:hover { background: #34495e; }
+        
+        /* Gaya khusus untuk tombol download */
+        .btn-download { background: #27ae60; margin-top: 10px; display: none; }
+        .btn-download:hover { background: #219653; }
     </style>
 </head>
 <body>
     <div class="controls">
-        <h3 style="margin-top:0;">Go 3D Viewer (Client-Side)</h3>
-        <p style="margin-bottom:0;">Tahan klik dan geser untuk <b>Rotasi</b>.<br>Gunakan scroll wheel untuk <b>Zoom</b>.</p>
+        <h3 style="margin-top:0;">Go 3D Viewer</h3>
+        <p style="margin-bottom:10px; font-size: 13px;">Tahan klik dan geser untuk <b>Rotasi</b>.<br>Gunakan scroll untuk <b>Zoom</b>.</p>
+        <hr style="border: 0; border-top: 1px solid #ccc; margin: 10px 0;">
+        
+        <form id="uploadForm">
+            <label style="font-size: 14px; font-weight: bold;">Upload File .obj:</label>
+            <input type="file" id="objFile" accept=".obj" required>
+            
+            <label style="font-size: 14px; font-weight: bold; display: block; margin-top: 10px;">Max Depth Octree:</label>
+            <input type="number" id="depth" value="5" min="1" max="8">
+            
+            <button type="submit">Proses Voxelization</button>
+        </form>
+        
+        <div id="loading" style="display: none; margin-top: 15px; color: #d35400; font-weight: bold; font-size: 14px; text-align: center;">
+            Memproses Voxelization...<br><small>Mohon tunggu sebentar</small>
+        </div>
+
+        <button type="button" id="downloadBtn" class="btn-download">💾 Simpan Hasil .obj</button>
     </div>
     
     <canvas id="viewer"></canvas>
 
     <script>
-        // Menerima suntikan data model 3D (Vertices dan Faces) dari server Go
-        const model = {{.ModelData}};
+        let model = {{.ModelData}};
+        let currentObjData = ""; // Menyimpan teks raw file .obj
+        let currentFileName = "voxelized.obj"; // Nama default untuk download
 
         const canvas = document.getElementById('viewer');
         const ctx = canvas.getContext('2d');
@@ -146,7 +263,6 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
         canvas.width = width;
         canvas.height = height;
 
-        // Auto-resize canvas jika jendela browser diubah ukurannya
         window.addEventListener('resize', () => {
             width = window.innerWidth;
             height = window.innerHeight;
@@ -155,36 +271,19 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
             draw();
         });
 
-        let rx = 0.5; // Rotasi awal X
-        let ry = -0.5; // Rotasi awal Y
+        let rx = 0.5; let ry = -0.5;
         let scale = Math.min(width, height) / 3;
-
         let isDragging = false;
-        let lastX = 0;
-        let lastY = 0;
+        let lastX = 0; let lastY = 0;
 
-        canvas.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            lastX = e.clientX;
-            lastY = e.clientY;
-        });
+        canvas.addEventListener('mousedown', (e) => { isDragging = true; lastX = e.clientX; lastY = e.clientY; });
+        window.addEventListener('mouseup', () => { isDragging = false; });
 
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        window.addEventListener('mousemove', (e) => {
+        canvas.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
-            const deltaX = e.clientX - lastX;
-            const deltaY = e.clientY - lastY;
-            
-            ry += deltaX * 0.01;
-            rx += deltaY * 0.01;
-            
-            lastX = e.clientX;
-            lastY = e.clientY;
-            
-            // requestAnimationFrame memastikan render mulus sesuai refresh rate monitor
+            ry += (e.clientX - lastX) * 0.01;
+            rx += (e.clientY - lastY) * 0.01;
+            lastX = e.clientX; lastY = e.clientY;
             requestAnimationFrame(draw);
         });
 
@@ -195,21 +294,24 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
             requestAnimationFrame(draw);
         }, { passive: false });
 
-        // Fungsi utama untuk kalkulasi matematika 3D dan menggambar ke Canvas
         function draw() {
             ctx.clearRect(0, 0, width, height);
+            
+            if (!model || !model.Vertices || model.Vertices.length === 0) {
+                ctx.fillStyle = '#7f8c8d';
+                ctx.font = 'bold 20px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Silakan unggah file .obj melalui form di kiri.', width / 2, height / 2);
+                return;
+            }
+
             ctx.strokeStyle = '#2c3e50';
             ctx.lineWidth = 1.0;
 
-            const sinX = Math.sin(rx);
-            const cosX = Math.cos(rx);
-            const sinY = Math.sin(ry);
-            const cosY = Math.cos(ry);
+            const sinX = Math.sin(rx); const cosX = Math.cos(rx);
+            const sinY = Math.sin(ry); const cosY = Math.cos(ry);
+            const cx = width / 2; const cy = height / 2;
 
-            const cx = width / 2;
-            const cy = height / 2;
-
-            // Memproyeksikan array Vertices 3D ke kooordinat 2D
             const projected = model.Vertices.map(v => {
                 const x1 = v.X * cosY - v.Z * sinY;
                 const z1 = v.X * sinY + v.Z * cosY;
@@ -218,7 +320,6 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
                 return { x: x1 * scale + cx, y: -y2 * scale + cy };
             });
 
-            // Menggambar garis wajah (faces) ke layar
             ctx.beginPath();
             model.Faces.forEach(face => {
                 if (face.length < 3) return;
@@ -231,13 +332,78 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
             ctx.stroke();
         }
 
-        // Render pertama kali saat halaman dimuat
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('objFile');
+            const depthInput = document.getElementById('depth');
+            const loadingDiv = document.getElementById('loading');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (fileInput.files.length === 0) return;
+            
+            // Simpan nama file orisinil untuk nama file download
+            let originalName = fileInput.files[0].name;
+            currentFileName = originalName.replace('.obj', '') + '_voxelized.obj';
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('depth', depthInput.value);
+            
+            loadingDiv.style.display = 'block';
+            downloadBtn.style.display = 'none'; // Sembunyikan tombol saat loading
+            
+            fetch('/voxelize', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) throw new Error("Gagal memproses file");
+                return response.json();
+            })
+            .then(data => {
+                // Sekarang 'data' mengandung 'model' dan 'objData'
+                model = data.model; 
+                currentObjData = data.objData;
+                
+                rx = 0.5; ry = -0.5;
+                scale = Math.min(width, height) / 3;
+                draw(); 
+                
+                loadingDiv.style.display = 'none';
+                downloadBtn.style.display = 'block'; // Tampilkan tombol download
+            })
+            .catch(err => {
+                alert(err.message);
+                loadingDiv.style.display = 'none';
+            });
+        });
+
+        // Event Listener untuk Tombol Download
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            if (!currentObjData) return;
+            
+            // Membuat Blob (Binary Large Object) yang berisi teks file .obj
+            const blob = new Blob([currentObjData], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            // Membuat elemen <a> maya untuk memicu unduhan di browser
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFileName; // Misalnya: cow_voxelized.obj
+            document.body.appendChild(a);
+            a.click();
+            
+            // Bersihkan sisa elemen
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
         draw();
     </script>
 </body>
 </html>`
 
-	// Menyuntikkan JSON ke dalam template HTML
 	t := template.Must(template.New("index").Parse(html))
 	t.Execute(w, struct{ ModelData template.JS }{template.JS(modelJSON)})
 }

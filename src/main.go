@@ -13,7 +13,6 @@ func main() {
 	fmt.Println("Menunggu input file...")
 	fmt.Println("Silakan buka browser dan akses: http://localhost:8080")
 
-	// Mendaftarkan endpoint URL
 	http.HandleFunc("/", handleIndex)
 	http.HandleFunc("/voxelize", handleVoxelize)
 

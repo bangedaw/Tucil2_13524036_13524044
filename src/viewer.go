@@ -24,7 +24,6 @@ type VoxelizeResponse struct {
 
 var currentModel Model
 
-// normalizeModel menempatkan model di pusat origin (0,0,0) dan menyesuaikan ukurannya.
 func normalizeModel(m Model) Model {
 	if len(m.Vertices) == 0 {
 		return m
@@ -108,7 +107,6 @@ func handleVoxelize(w http.ResponseWriter, r *http.Request) {
 	var solidVoxels []BoundingBox
 	CollectVoxels(rootNode, &solidVoxels)
 
-	// --- AWAL LOGIKA OPTIMASI PERMUKAAN (HIDDEN FACE CULLING) ---
 	gridDim := 1 << maxDepth
 	rootSize := rootBoundary.Max.X - rootBoundary.Min.X
 	voxelSize := rootSize / float64(gridDim)
@@ -157,9 +155,7 @@ func handleVoxelize(w http.ResponseWriter, r *http.Request) {
 	}
 
 	currentModel = normalizeModel(optimizedModel)
-	// --- AKHIR LOGIKA OPTIMASI ---
 
-	// Export voxel utuh ke file .obj untuk fitur Download
 	numVertices, numFaces, err := ExportToObj(solidVoxels, tempOutput)
 	if err != nil {
 		http.Error(w, "Gagal export voxel", http.StatusInternalServerError)
@@ -199,7 +195,16 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
     <meta charset="UTF-8">
     <title>Go 3D Object Viewer - Solid Voxel</title>
     <style>
-        body { margin: 0; overflow: hidden; background-color: #f4f4f9; font-family: sans-serif; }
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background-color: #d1d8e0; 
+            background-image: 
+                linear-gradient(rgba(44, 62, 80, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(44, 62, 80, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: sans-serif; 
+        }
         canvas { display: block; cursor: grab; }
         canvas:active { cursor: grabbing; }
         .controls { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 250px; }

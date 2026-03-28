@@ -1,7 +1,7 @@
-28 Mar 2026 22:41:06.367 INFO  - 
+28 Mar 2026 22:58:27.458 INFO  - 
 Welcome to arara 7.1.5!
 -----------------------------------------------------------------
-28 Mar 2026 22:41:06.373 DEBUG - 
+28 Mar 2026 22:58:27.464 DEBUG - 
 ::: arara @ /usr/share/texmf-dist/scripts/arara
 ::: Java 21.0.9, Arch Linux
 ::: /usr/lib/jvm/java-21-openjdk
@@ -9,17 +9,17 @@ Welcome to arara 7.1.5!
 ::: user.home @ /home/raulin
 ::: CF @ [none]
 -----------------------------------------------------------------
-28 Mar 2026 22:41:06.384 INFO  - Processing "Tucil2_13524036_13524044.tex" (size: 428 B, last modified: 2026-03-28 15:38:26), please wait.
-28 Mar 2026 22:41:06.395 INFO  - I found a potential pattern in line 1: pdflatex
-28 Mar 2026 22:41:06.399 INFO  - All directives were validated. We are good to go.
+28 Mar 2026 22:58:27.475 INFO  - Processing "Tucil2_13524036_13524044.tex" (size: 428 B, last modified: 2026-03-28 15:38:26), please wait.
+28 Mar 2026 22:58:27.486 INFO  - I found a potential pattern in line 1: pdflatex
+28 Mar 2026 22:58:27.491 INFO  - All directives were validated. We are good to go.
 -------------------------- DIRECTIVES ---------------------------
 Directive(identifier='pdflatex', parameters={reference=/home/raulin/Documents/Important/IF24-ITB/04-Semester-4/02-Strategi-Algoritma-IF2211/Tucil-2-Voxel/doc/Laporan/Tucil2_13524036_13524044.tex},conditional={ NONE }, lineNumbers=[1])
 -----------------------------------------------------------------
-28 Mar 2026 22:41:06.401 INFO  - I am ready to interpret rule "pdflatex".
-28 Mar 2026 22:41:06.404 INFO  - Rule location: "/usr/share/texmf-dist/scripts/arara/rules"
-28 Mar 2026 22:41:06.543 INFO  - I am ready to interpret task "PDFLaTeX engine" from rule "PDFLaTeX".
-28 Mar 2026 22:41:06.543 INFO  - System command: [pdflatex, Tucil2_13524036_13524044.tex] @ /home/raulin/Documents/Important/IF24-ITB/04-Semester-4/02-Strategi-Algoritma-IF2211/Tucil-2-Voxel/doc/Laporan
-28 Mar 2026 22:41:11.893 INFO  -                 ---------------------- BEGIN OUTPUT BUFFER ----------------------
+28 Mar 2026 22:58:27.493 INFO  - I am ready to interpret rule "pdflatex".
+28 Mar 2026 22:58:27.496 INFO  - Rule location: "/usr/share/texmf-dist/scripts/arara/rules"
+28 Mar 2026 22:58:27.647 INFO  - I am ready to interpret task "PDFLaTeX engine" from rule "PDFLaTeX".
+28 Mar 2026 22:58:27.648 INFO  - System command: [pdflatex, Tucil2_13524036_13524044.tex] @ /home/raulin/Documents/Important/IF24-ITB/04-Semester-4/02-Strategi-Algoritma-IF2211/Tucil-2-Voxel/doc/Laporan
+28 Mar 2026 22:58:32.878 INFO  -                 ---------------------- BEGIN OUTPUT BUFFER ----------------------
                 This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
@@ -515,12 +515,10 @@ Package minitoc(hints) Warning: W0024
 (minitoc(hints))                in the Tucil2_13524036_13524044.log file.
 
 
-[13.14 <./figures/ttd endra.jpg>] (./Tucil2_13524036_13524044.aux)
+[13.14 <./figures/ttdedo.jpg> <./figures/ttd endra.jpg>]
+(./Tucil2_13524036_13524044.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  )
 (see the transcript file for additional information)</usr/share/texmf-dist/font
@@ -537,9 +535,9 @@ fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.
 pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Tucil2_13524036_13524044.pdf (14 pages, 2063845 bytes).
+Output written on Tucil2_13524036_13524044.pdf (14 pages, 2086130 bytes).
 Transcript written on Tucil2_13524036_13524044.log.
 
                 ----------------------- END OUTPUT BUFFER -----------------------
-28 Mar 2026 22:41:11.897 INFO  - Task result: SUCCESS
-28 Mar 2026 22:41:11.899 INFO  - Total: 5.758 seconds
+28 Mar 2026 22:58:32.882 INFO  - Task result: SUCCESS
+28 Mar 2026 22:58:32.884 INFO  - Total: 5.644 seconds

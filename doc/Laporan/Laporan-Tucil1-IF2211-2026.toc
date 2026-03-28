@@ -21,15 +21,10 @@
 \contentsline {subsection}{\numberline {7.1}GUI}{8}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Output as Image}{9}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Pengujian}{9}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Kasus Uji 1}{10}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Kasus Uji 2}{11}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Kasus Uji 3}{11}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}Kasus Uji 4}{12}{subsection.8.4}%
-\contentsline {subsection}{\numberline {8.5}Kasus Uji 5}{12}{subsection.8.5}%
-\contentsline {subsection}{\numberline {8.6}Kasus Uji 6}{14}{subsection.8.6}%
-\contentsline {subsection}{\numberline {8.7}Kasus Uji 7}{14}{subsection.8.7}%
-\contentsline {subsection}{\numberline {8.8}Hasil Pengujian}{15}{subsection.8.8}%
-\contentsline {section}{\numberline {9}Penutup}{15}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Lampiran}{15}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Kata Penutup}{15}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Pernyataan}{16}{subsection.9.3}%
+\contentsline {subsection}{\numberline {8.1}Kasus Uji Objek \textit {cow}}{9}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Kasus Uji Objek \textit {teapot}}{11}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Hasil Pengujian}{13}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Penutup}{14}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Lampiran}{14}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Kata Penutup}{14}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Pernyataan}{15}{subsection.9.3}%

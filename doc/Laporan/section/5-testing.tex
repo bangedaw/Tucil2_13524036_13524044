@@ -3,225 +3,109 @@ Untuk memastikan program berjalan dengan benar, dilakukan beberapa
 pengujian dengan beberapa kasus uji (\textit{test case}. Kasus uji
     yang digunakan adalah sebagai berikut.
     \begin{enumerate}
-        \item Kasus Uji $4 \times 4$
-        \item Kasus Uji $9 \times 9$
-        \item Kasus Uji $10 \times 10$
-        \item Kasus Uji Tidak Valid
-            \begin{itemize}
-                \item Papan Sangat Sempit
-                \item Jumlah Baris $\ne$ Kolom
-                \item Jumlah Baris $\ne$ Jumlah Warna
-                \item \textit{File input} tidak valid
-            \end{itemize}
+        \item Kasus Uji \texttt{maxDepth} = 3
+        \item Kasus Uji \texttt{maxDepth} = 5
+        \item Kasus Uji \texttt{maxDepth} = 7
     \end{enumerate}
 
-    \pagebreak
-
-    \subsection{Kasus Uji 1}\label{sub:Kasus Uji 1} % (fold)
-
-    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
-        boxrule=0.5pt]
-\begin{verbatim}
-AABB
-AABB
-CCDD
-CCDD
-\end{verbatim}
-    \end{tcolorbox}
+    \subsection{Kasus Uji Objek \textit{cow}}\label{sub:Kasus Uji Objek \textit{cow}} % (fold)
 
     \begin{itemize}
-        \item Deskripsi: Papan $4 \times 4$
-        \item Output:
-            \begin{figure}[htbp]
+        \item Input :
+            \begin{figure}[H]
                 \begin{center}
-                    \includegraphics[width=\textwidth]{figures/itb.png}
+                    \includegraphics[width=\textwidth]{figures/cow-input.png}
                 \end{center}
-                \caption{Hasil Kasus Uji 1}
+                \caption{Input Kasus Uji \textit{cow}}
             \end{figure}
-
-    \end{itemize}
-    % subsection Kasus Uji 1 (end)
-
-    \subsection{Kasus Uji 2}\label{sub:Kasus Uji 2} % (fold)
-    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
-        boxrule=0.5pt]
-\begin{verbatim}
-AAABBCCCD
-ABBBBCECD
-ABBBDCECD
-AAABDCCCD
-BBBBDDDDD
-FGGGDDHDD
-FGIGDDHDD
-FGIGDDHDD
-FGGGDDHHH
-\end{verbatim}
-    \end{tcolorbox}
-
-    \begin{itemize}
-        \item Deskripsi: Papan $9 \times 9$
         \item Output:
-            \begin{figure}[htbp]
-                \begin{center}
-                    \includegraphics[width=0.7\textwidth]{figures/itb.png}
-                \end{center}
-                \caption{Hasil Kasus Uji 2}
-            \end{figure}
-
+            \begin{enumerate}
+                \item \texttt{maxDepth} = 3 \\
+                    \begin{figure}[H]
+                        \begin{center}
+                            \includegraphics[width=0.3\textwidth]{figures/cow-output-3.png}
+                        \end{center}
+                        \caption{Hasil Kasus Uji \textit{cow} dengan \texttt{maxDepth} = 3}
+                    \end{figure}
+                \item \texttt{maxDepth} = 5 \\
+                    \begin{figure}[H]
+                        \begin{center}
+                            \includegraphics[width=0.3\textwidth]{figures/cow-output-5.png}
+                        \end{center}
+                        \caption{Hasil Kasus Uji \textit{cow} dengan \texttt{maxDepth} = 5}
+                    \end{figure}
+                \item \texttt{maxDepth} = 7 \\
+                    \begin{figure}[H]
+                        \begin{center}
+                            \includegraphics[width=0.3\textwidth]{figures/cow-output-7.png}
+                        \end{center}
+                        \caption{Hasil Kasus Uji \textit{cow} dengan \texttt{maxDepth} = 7}
+                    \end{figure}
+            \end{enumerate}
     \end{itemize}
-
-    % subsection Kasus Uji 2 (end)
-
-    \subsection{Kasus Uji 3}\label{sub:Kasus Uji 3} % (fold)
-    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
-        boxrule=0.5pt]
-\begin{verbatim}
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-ABCDEFGHIJ
-\end{verbatim}
-    \end{tcolorbox}
-
+    
+    \subsection{Kasus Uji Objek \textit{teapot}}\label{sub:Kasus Uji Objek \textit{teapot}} % (fold)
     \begin{itemize}
-        \item Deskripsi: Papan $10 \times 10$
+        \item Input :
+            \begin{figure}[H]
+                \begin{center}
+                    \includegraphics[width=\textwidth]{figures/teapot-input.png}
+                \end{center}
+                \caption{Input Kasus Uji \textit{teapot}}
+            \end{figure}
         \item Output:
-            \begin{figure}[htbp]
-                \begin{center}
-                    \includegraphics[width=0.7\textwidth]{figures/itb.png}
-                \end{center}
-                \caption{Hasil Kasus Uji 3}
-            \end{figure}
-
+            \begin{enumerate}
+                \item \texttt{maxDepth} = 3 \\
+                    \begin{figure}[H]
+                        \begin{center}
+                            \includegraphics[width=0.3\textwidth]{figures/teapot-output-3.png}
+                        \end{center}
+                        \caption{Hasil Kasus Uji \textit{teapot} dengan \texttt{maxDepth} = 3}
+                    \end{figure}
+                \item \texttt{maxDepth} = 5 \\
+                    \begin{figure}[H]
+                        \begin{center}
+                            \includegraphics[width=0.3\textwidth]{figures/teapot-output-5.png}
+                        \end{center}
+                        \caption{Hasil Kasus Uji \textit{teapot} dengan \texttt{maxDepth} = 5}
+                    \end{figure}
+                \item \texttt{maxDepth} = 7 \\
+                    \begin{figure}[H]
+                        \begin{center}
+                            \includegraphics[width=0.3\textwidth]{figures/teapot-output-7.png}
+                        \end{center}
+                        \caption{Hasil Kasus Uji \textit{teapot} dengan \texttt{maxDepth} = 7}
+                    \end{figure}
+            \end{enumerate}
     \end{itemize}
-
-    % subsection Kasus Uji 3 (end)
-
-    \subsection{Kasus Uji 4}\label{sub:Kasus Uji 4} % (fold)
-    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
-        boxrule=0.5pt]
-\begin{verbatim}
-ABC
-ABC
-ABC
-\end{verbatim}
-    \end{tcolorbox}
-
-    \begin{itemize}
-        \item Deskripsi: Papan $3 \times 3$ (Papan terlalu sempit
-            tidak ada solusi)
-        \item Output:
-            \begin{figure}[htbp]
-                \begin{center}
-                    \includegraphics[width=0.5\textwidth]{figures/itb.png}
-                \end{center}
-                \caption{Hasil Kasus Uji 4}
-            \end{figure}
-    \end{itemize}
-    % subsection Kasus Uji 4 (end)
-
-    \subsection{Kasus Uji 5}\label{sub:Kasus Uji 5} % (fold)
-    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
-        boxrule=0.5pt]
-\begin{verbatim}
-AA
-BB
-BB
-\end{verbatim}
-    \end{tcolorbox}
-
-    \begin{itemize}
-        \item Deskripsi: Papan $3 \times 2$ (Jumlah Baris dan Kolom tidak sama)
-        \item Output:
-            \begin{figure}[htbp]
-                \begin{center}
-                    \includegraphics[width=0.5\textwidth]{figures/itb.png}
-                \end{center}
-                \caption{Hasil Kasus Uji 5}
-            \end{figure}
-    \end{itemize}
-    % subsection Kasus Uji 5 (end)
-
-    \subsection{Kasus Uji 6}\label{sub:Kasus Uji 6} % (fold)
-    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
-        boxrule=0.5pt]
-\begin{verbatim}
-ABCDD
-ABCDD
-ABCDD
-ABCDD
-ABCDD
-\end{verbatim}
-    \end{tcolorbox}
-
-    \begin{itemize}
-        \item Deskripsi: Jumlah Baris ($5$) dengan Jumlah Warna ($4$) tidak sama
-        \item Output:
-            \begin{figure}[htbp]
-                \begin{center}
-                    \includegraphics[width=0.5\textwidth]{figures/itb.png}
-                \end{center}
-                \caption{Hasil Kasus Uji 7}
-            \end{figure}
-    \end{itemize}
-
-    % subsection Kasus Uji 6 (end)
-
-    \subsection{Kasus Uji 7}\label{sub:Kasus Uji 7} % (fold)
-    \begin{tcolorbox}[colback=white, colframe=black, sharp corners,
-        boxrule=0.5pt]
-\begin{verbatim}
-    random.txt
-\end{verbatim}
-    \end{tcolorbox}
-
-    \begin{itemize}
-    \item Deskripsi: \textit{File input} tidak valid)
-    \item Output:
-        \begin{figure}[htbp]
-            \begin{center}
-                \includegraphics[width=0.5\textwidth]{figures/itb.png}
-            \end{center}
-            \caption{Hasil Kasus Uji 7}
-        \end{figure}
-\end{itemize}
-% subsection Kasus Uji 7 (end)
-
-\pagebreak
 
 \subsection{Hasil Pengujian}\label{sub:Hasil Pengujian} % (fold)
 Berikut adalah ringkasan hasil pengujian kasus uji yang sudah
-dilakukan beserta waktu penyelesaian dan banyak kasus yang ditinjau.
+dilakukan beserta jumlah \textit{voxel}, \textit{vertex}, dan \textit{faces} yang terbentuk.
 \begin{table}[!htbp]
     \begin{center}
         \begin{tabular}[\textwidth]{|c|L{4cm}|c|c|c|}
             \hline
-            \textbf{No} & \textbf{Deskripsi Kasus} & \textbf{Ukuran} &
-            \textbf{Waktu} & \textbf{Banyak Kasus} \\
+            \textbf{No} & \textbf{Deskripsi Kasus} & \textbf{Voxel} &
+            \textbf{Vertex} & \textbf{Faces} \\
             \hline
-            1 & Kasus Normal & $4 \times 4$ & $\sim0$ ms & 115 kasus \\
+            1 & \textit{cow} \texttt{maxDepth} = 3 & 88 & 704 & 528 \\
             \hline
-            2 & Kasus Normal & $9 \times 9$ & $304$ ms & 11.775.509 kasus \\
+            2 & \textit{cow} \texttt{maxDepth} = 5 & 1362 & 10896 & 8172 \\
             \hline
-            3 & Kasus Normal & $10 \times 10$ & $5159$ ms & 241.357.969 kasus \\
+            3 & \textit{cow} \texttt{maxDepth} = 7 & 22864 & 182912 & 137184 \\
             \hline
-            4 & Papan Terlalu Sempit & $3 \times 3$ & N/A & Tidak ada solusi \\
+            4 & \textit{teapot} \texttt{maxDepth} = 3 & 108 & 864 & 648 \\
             \hline
-            5 & Baris $\neq$ Kolom & $3 \times 2$ & N/A & Input tidak valid \\
+            5 & \textit{teapot} \texttt{maxDepth} = 5 & 1748 & 13984 & 10488 \\
             \hline
-            6 & Baris $\neq$ Warna & $5 \times 5$ & N/A & Input tidak valid \\
-            \hline
-            7 & File Tidak Ditemukan & - & N/A & Input tidak valid \\
+            6 & \textit{teapot} \texttt{maxDepth} = 7 & 29565 & 236520 & 177390 \\
             \hline
         \end{tabular}
         \caption{Ringkasan Hasil Pengujian Kasus Uji}
     \end{center}
 \end{table}
+
+\pagebreak
 % subsection Hasil Pengujian (end)
 % section Pengujian (end)

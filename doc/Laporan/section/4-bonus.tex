@@ -1,84 +1,75 @@
-\section{Implementasi Spesifikasi Bonus}\label{sub:Implementasi
-Spesifikasi Bonus} % (fold)
-\subsection{GUI}\label{sub:GUI} % (fold)
+\section{Implementasi Spesifikasi Bonus}\label{sec:Implementasi Spesifikasi Bonus} % (fold)
 
-Dalam \texttt{Main.java}, struktur komponen digunakan sebagai berikut.
+\subsection{Concurrency pada Pembangunan Octree}\label{sub:Concurrency pada Pembangunan Octree} % (fold)
+Algoritma \textit{Divide and Conquer} bekerja dengan cara membagi satu kotak (\textit{node}) menjadi delapan kotak anak. Proses pengecekan pada setiap kotak anak ini berdiri sendiri dan tidak saling bergantung satu sama lain. Karena alasan tersebut, proses ini sangat cocok dipercepat menggunakan \textit{concurrency} (pemrosesan bersamaan).
+
+Pada program ini, \textit{concurrency} dibuat menggunakan \textit{Goroutines} yang merupakan fitur bawaan dari bahasa Go. Agar proses pemrosesan berjalan aman, digunakan dua alat bantu dari pustaka \texttt{sync}:
 \begin{itemize}
-    \item Stage \& Scene sebagai kontainer utama.
-    \item VBox (Root). Layout utama untuk elemen disusun secara vertikal.
-    \item Hbox. Baris horizontal berisi \texttt{TextField} untuk
-        \textit{input} nama \textit{file} dan \texttt{Button} untuk
-        memulai penyelesaian.
-    \item GridPane. Komponen untuk me-\textit{render} papan.
+    \item \texttt{sync.WaitGroup}: Alat ini bertugas menahan atau menyuruh proses induk untuk menunggu sampai kedelapan anak \textit{node}-nya selesai diproses. Setelah semua anak selesai, barulah program lanjut ke tahap berikutnya.
+    \item \texttt{sync.Mutex}: Alat ini digunakan untuk mencegah tabrakan data (\textit{race condition}). Karena ada banyak \textit{goroutine} yang berjalan bersamaan dan mencoba mengubah angka statistik (seperti jumlah \textit{node} yang berhasil dibuat), \textit{Mutex} memastikan bahwa hanya ada satu proses yang boleh mencatat data pada satu waktu.
 \end{itemize}
 
-Untuk memastikan GUI tetap responsif saat menjalankan algoritma,
-program ini menerapkan \textit{multithreading} untuk memisahkan
-perhitungan algoritma dengan menampilkan hasil perhitungan.
-\begin{enumerate}
-    \item Algoritma \texttt{Solver.solve} dijalankan di dalam
-        \textit{thread} terpisah.
-    \item \texttt{Solver} menerima objek \texttt{Consumer}.
-    \item \texttt{Platform.runLater()} memperbarui tampilan papan
-        dari \textit{thread} dari nomor 1.
-\end{enumerate}
+Potongan kode berikut diambil dari file \texttt{src/build.go}, yang menunjukkan bagaimana setiap anak \textit{node} diproses secara bersamaan di dalam \textit{goroutine} baru:
 
-Fungsi \texttt{renderBoard} merupakan fungsi utama yang menampilkan
-\texttt{String[]][] board} dari \texttt{Solver} dalam GUI.
-\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
-     private void renderBoard(String[][] board, Solver.Koordinat[] solution) {
-        boardGrid.getChildren().clear();
-        int n = board.length;
+\begin{lstlisting}[language=C, basicstyle=\ttfamily\small, breaklines=true]
+func BuildOctreeConcurrent(node *OctreeNode, vertices []Vector3, faces []Face, currentDepth, maxDepth int, stats *OctreeStats, wg *sync.WaitGroup) {
+    defer wg.Done()
 
-        double cellSize = Math.min(600.0 / n, 50.0);
-        double fontSize = cellSize * 0.5;
-
-        generateColorMap(board);
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                StackPane cell = new StackPane();
-                Rectangle rect = new Rectangle(cellSize, cellSize);
-                rect.setFill(colorMap.getOrDefault(board[i][j], Color.LIGHTGRAY));
-                rect.setStroke(Color.BLACK);
-                rect.setStrokeWidth(0.2);
-                cell.getChildren().add(rect);
-
-                for (Solver.Koordinat q : solution) {
-                    if (q.x() == i && q.y() == j) {
-                        Label queenLabel = new Label("#");
-                        queenLabel.setStyle(
-                                "-fx-font-size: " + fontSize + "px; -fx-text-fill: black;");
-                        cell.getChildren().add(queenLabel);
-                    }
-                }
-                boardGrid.add(cell, j, i);
-            }
+    stats.mu.Lock()
+    stats.CreatedNodesByDepth[currentDepth]++
+    stats.mu.Unlock()
+    ...
+    var childWg sync.WaitGroup
+    for i := 0; i < 8; i++ {
+        ...
+        if len(intersectingFaces) > 0 {
+            childWg.Add(1)
+            go BuildOctreeConcurrent(childNode, vertices, intersectingFaces, currentDepth+1, maxDepth, stats, &childWg)
         }
     }
-\end{lstlisting}
-
-Algoritma ini merubah koordinat dalam \texttt{board} dengan
-\textit{cell} dengan warna yang berbeda-beda yang diberikan oleh
-fungsi \texttt{generateColorMap}.
-% subsection GUI (end)
-
-\subsection{Output as Image}\label{sub:Output as Image} % (fold)
-\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
-    private void saveAsImage(String fileName) {
-    try {
-        WritableImage snapshot = boardGrid.snapshot(null, null);
-        File outputFile = new File("src/main/output/" + fileName + ".png");
-        ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", outputFile);
-        System.out.println("Papan berhasil disimpan sebagai gambar: " + outputFile.getAbsolutePath());
-    } catch (Exception e) {
-        System.out.println("Gagal menyimpan gambar: " + e.getMessage());
-    }
+    
+    childWg.Wait()
 }
 \end{lstlisting}
+% subsection Concurrency pada Pembangunan Octree (end)
 
-Algoritma ini mengambil tangkapan dari \texttt{boardGrid}, lalu
-menyimpannya dalam \textit{folder} \texttt{src/main/output/}. Untuk
-keseragaman \textit{output} dikonversi menuju format \texttt{.png}.
-% subsection Output as Image (end)
+\subsection{Interactive Web Viewer}\label{sub:Interactive Web Viewer} % (fold)
+Untuk menampilkan model 3D, program ini tidak menggunakan aplikasi tambahan dari luar agar mudah dijalankan di komputer mana saja. Tampilan dibuat dalam bentuk halaman \textit{web} interaktif menggunakan pustaka bawaan Go (\texttt{net/http}) yang dipadukan dengan fitur kanvas HTML5 dan JavaScript.
+
+Agar tampilan 3D berjalan lancar dan tidak patah-patah saat diputar, program ini menerapkan dua strategi optimasi utama:
+\begin{enumerate}
+    \item Program Go di belakang layar (diimplementasikan pada file \texttt{src/optimizer.go} dan \texttt{src/viewer.go}) akan mengecek setiap kubus \textit{voxel}. Jika ada sisi kubus yang saling menempel dengan kubus tetangganya, sisi tersebut tidak akan dikirim ke \textit{browser} karena posisinya tertutup di bagian dalam objek. Cara ini sangat menghemat ukuran data.
+    \item Perhitungan matematika untuk memutar titik-titik 3D dilakukan langsung oleh JavaScript di \textit{browser} pengguna. Setelah itu, program menerapkan \textit{Painter's Algorithm}. Algoritma ini bekerja dengan cara mengurutkan jarak kedalaman (sumbu Z) dari setiap sisi persegi. Sisi yang lokasinya paling jauh di belakang akan digambar dan diwarnai padat lebih dulu. Dengan begitu, sisi yang ada di depan akan otomatis menutupi garis-garis yang ada di belakangnya secara rapi.
+\end{enumerate}
+
+Potongan kode JavaScript berikut diambil dari file \texttt{src/viewer.go}, yang mengatur cara gambar diproyeksikan dan diwarnai:
+
+\begin{lstlisting}[language=Java, basicstyle=\ttfamily\small, breaklines=true]
+const projected = model.Vertices.map(v => {
+    const x1 = v.X * cosY - v.Z * sinY;
+    const z1 = v.X * sinY + v.Z * cosY;
+    const y1 = v.Y;
+    const y2 = y1 * cosX - z1 * sinX;
+    const z2 = z1 * cosX + y1 * sinX;
+    return { x: x1 * scale + cx, y: -y2 * scale + cy, z: z2 };
+});
+
+facesToDraw.sort((a, b) => a.zDepth - b.zDepth);
+
+facesToDraw.forEach(faceObj => {
+    const face = faceObj.indices;
+    ctx.beginPath();
+    ctx.moveTo(projected[face[0]].x, projected[face[0]].y);
+    for (let i = 1; i < face.length; i++) {
+        ctx.lineTo(projected[face[i]].x, projected[face[i]].y);
+    }
+    ctx.closePath();
+    
+    ctx.fillStyle = '#ecf0f1';
+    ctx.fill();
+    ctx.stroke();
+});
+\end{lstlisting}
+% subsection Interactive Web Viewer (end)
+
 % section Implementasi Spesifikasi Bonus (end)

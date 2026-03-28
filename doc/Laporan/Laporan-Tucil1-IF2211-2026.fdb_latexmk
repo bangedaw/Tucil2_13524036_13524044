@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1774672515.18378 "c:/Users/edwar/IF-ITB24/SEMESTER4/STIMA/Tucil2_13524036_13524044/doc/Laporan/Laporan-Tucil1-IF2211-2026.tex" "Laporan-Tucil1-IF2211-2026.pdf" "Laporan-Tucil1-IF2211-2026" 1774672518.84946 2
+["pdflatex"] 1774679037.66202 "c:/Users/edwar/IF-ITB24/SEMESTER4/STIMA/Tucil2_13524036_13524044/doc/Laporan/Laporan-Tucil1-IF2211-2026.tex" "Laporan-Tucil1-IF2211-2026.pdf" "Laporan-Tucil1-IF2211-2026" 1774679041.19521 2
   "C:/Users/edwar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1773459956 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/edwar/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1765307922 11548 51a286887d38208a906bf63d2151fba5 ""
   "C:/Users/edwar/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1765307829 24225047 826f7a2106a2cf9037de11392d517ccf ""
@@ -538,12 +538,12 @@
   "C:/Users/edwar/AppData/Local/Programs/MiKTeX/tex/latex/xifthen/xifthen.sty" 1448274436 5689 1bfa68243e89a54479e7d0580773c57e ""
   "C:/Users/edwar/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/edwar/AppData/Local/Programs/MiKTeX/tex/latex/xpatch/xpatch.sty" 1585221260 8510 7803f78066c4f9d008405191a4b43073 ""
-  "Laporan-Tucil1-IF2211-2026.aux" 1774672518 11945 566963441179851a41695a4ad7e29af0 "pdflatex"
-  "Laporan-Tucil1-IF2211-2026.mtc" 1774672516 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "Laporan-Tucil1-IF2211-2026.mtc0" 1774672516 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "Laporan-Tucil1-IF2211-2026.out" 1774672518 4701 9df43e88a2d9213f83aba362b995b3dd "pdflatex"
+  "Laporan-Tucil1-IF2211-2026.aux" 1774679040 12023 cf84bbe3eec55b8ca750fa678c4f10e7 "pdflatex"
+  "Laporan-Tucil1-IF2211-2026.mtc" 1774679039 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "Laporan-Tucil1-IF2211-2026.mtc0" 1774679039 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "Laporan-Tucil1-IF2211-2026.out" 1774679040 4905 b4381ed030a5045dce8669359a3958cd "pdflatex"
   "Laporan-Tucil1-IF2211-2026.tex" 1774672514 453 128653b2250ecf2cbbb2d5ed0cfbaca9 ""
-  "Laporan-Tucil1-IF2211-2026.toc" 1774672518 2393 a88da8e615baf7bcd9656d087e4fd5ef "pdflatex"
+  "Laporan-Tucil1-IF2211-2026.toc" 1774679040 2432 7b307c0a36793bcbb2a403f0da416293 "pdflatex"
   "c:/Users/edwar/IF-ITB24/SEMESTER4/STIMA/Tucil2_13524036_13524044/doc/Laporan/Laporan-Tucil1-IF2211-2026.tex" 1774672514 453 128653b2250ecf2cbbb2d5ed0cfbaca9 ""
   "figures/cow-input.png" 1774668451 78737 b7c7efd25b14560eab0f2c80c55f308a ""
   "figures/cow-output-3.png" 1774668871 120336 d25b3ec1375d0ec6846734a1a200d186 ""
@@ -562,8 +562,8 @@
   "preamble.sty" 1774668190 8232 08b4dab4a503d62ff8ec2aaef7b98451 ""
   "section/1-dahulu.tex" 1774668190 9786 a36f486faba72f3bc4d729017f0d85a0 ""
   "section/2-desain.tex" 1774668190 2996 44595d622f450e423ad1f33a5d1cef06 ""
-  "section/3-implementasi.tex" 1774668190 7268 50a4b5a1b6f948f53997b06c847120c8 ""
-  "section/4-bonus.tex" 1774668190 3675 2ba5a7365879b947bcd039f91e3b715c ""
+  "section/3-implementasi.tex" 1774678790 7268 50a4b5a1b6f948f53997b06c847120c8 ""
+  "section/4-bonus.tex" 1774679036 4742 7095d1f7f6978599933ba92db87ee712 ""
   "section/5-testing.tex" 1774672314 5017 96fc54adc1df1e24ff4a877d84f3cfef ""
   "section/6-penutup.tex" 1774668190 2494 86bf61c1bc9f2ce85bc9f67cf01e9ab7 ""
   (generated)
@@ -576,3 +576,5 @@
   "Laporan-Tucil1-IF2211-2026.pdf"
   "Laporan-Tucil1-IF2211-2026.toc"
   (rewritten before read)
+  "Laporan-Tucil1-IF2211-2026.mtc"
+  "Laporan-Tucil1-IF2211-2026.mtc0"

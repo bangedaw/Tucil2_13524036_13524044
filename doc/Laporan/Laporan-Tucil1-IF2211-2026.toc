@@ -18,8 +18,8 @@
 \contentsline {subsection}{\numberline {6.2}Algoritma Utama dalam Java}{7}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Fungsi Pembantu}{7}{subsection.6.3}%
 \contentsline {section}{\numberline {7}Implementasi Spesifikasi Bonus}{8}{section.7}%
-\contentsline {subsection}{\numberline {7.1}GUI}{8}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Output as Image}{9}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.1}Concurrency pada Pembangunan Octree}{8}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Interactive Web Viewer}{9}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Pengujian}{9}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Kasus Uji Objek \textit {cow}}{9}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Kasus Uji Objek \textit {teapot}}{11}{subsection.8.2}%
